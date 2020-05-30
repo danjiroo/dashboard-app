@@ -22,7 +22,7 @@ mongoose
 // use routes
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
-// app.use('/api/items', require('./routes/api/items'));
+app.use('/api/tasks', require('./routes/api/tasks'));
 
 if(process.env.NODE_ENV === 'production') {
     // set static folder

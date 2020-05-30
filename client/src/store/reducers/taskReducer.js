@@ -1,27 +1,37 @@
 const initState = {
-    tasks: []
+    tasks: [],
+    loading: false
 }
 
 const taskReducer = (state = initState, action) => {
     switch(action.type) {
-        case 'CREATE_TASK': 
+        case 'GET_TASK': {
             return {
                 ...state,
-                tasks: [
-                    ...state.tasks,
-                    {
-                        id: action.id, 
-                        title: action.title, 
-                        instruction: action.instruction
-                    }
-                ]
+                tasks: action.payload,
+                loading: false
             }
-        case 'DELETE_TASK':
+        }
+        case 'CREATE_TASK': {
             return {
                 ...state,
-                tasks: state.tasks.filter(task => task.id !== action.id)
+                tasks: [ action.payload, ...state.tasks ]
             }
-        default: return state
+        }
+        case 'DELETE_TASK': {
+            return {
+                ...state,
+                tasks: state.tasks.filter(task => task._id !== action.payload)
+            }
+        }
+        case 'LOADING_TASK': {
+            return {
+                ...state,
+                loading: true
+            }
+        }
+        default:
+            return state
     }
 }
 

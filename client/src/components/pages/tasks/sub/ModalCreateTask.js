@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // ck editor
 import CKEditor from '@ckeditor/ckeditor5-react';
@@ -9,6 +9,8 @@ import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { createTask } from '../../../../store/actions/taskActions';
 
 const ModalCreateTask = ({setModalCreate}) => {
+    const auth = useSelector(state => state.auth);
+    const { name } = auth.user;
     const [title, setTitle] = useState('');
     const [instruction, setInstruction] = useState('');
     const [error, setError] = useState(false);
@@ -30,7 +32,9 @@ const ModalCreateTask = ({setModalCreate}) => {
             setError(true);
             return          
         }
-        dispatch(createTask(title, instruction));
+        let newtask = { title, instruction, name }
+        console.log(newtask)
+        dispatch(createTask(newtask));
         setTitle('');
         setInstruction('');
         setModalCreate(false)
@@ -48,7 +52,7 @@ const ModalCreateTask = ({setModalCreate}) => {
                         <h3>Create a new task</h3>
                         <form onSubmit={e => handleSubmit(e)}>
                             <label htmlFor="title">
-                                Title: * { error && <span>Please input required (*) fields.</span> }
+                                Title: * { error && <span className="spanerror">Please input required (*) fields.</span> }
                                 <input name="title" type="text" value={title} onChange={e => handleTitleChange(e)} placeholder="Task title..." />
                             </label>
                             <label htmlFor="instruction">
