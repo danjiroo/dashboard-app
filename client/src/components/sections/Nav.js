@@ -8,12 +8,12 @@ const Nav = ({hidden, setHidden}) => {
     const backToTop = useRef(null);
 
     useEffect(() => {
-        let toTop = window.addEventListener('click', () => {
+        let toTop = backToTop.current.addEventListener('click', () => {
             window.scrollTo(0, 0)
         })
 
         return () => {
-            window.removeEventListener('click', toTop)
+            backToTop.current.removeEventListener('click', toTop)
         }
     })
     

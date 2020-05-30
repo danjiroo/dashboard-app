@@ -17,7 +17,7 @@ const TasksLeft = ({hidden, setHidden}) => {
                     <li><NavLink to="/tasks/teamtasks" exact>Team Tasks</NavLink></li>
                 </ul>
             </div>
-            { user.role === 'Administrator' && (
+            { (user.role === 'Administrator' || user.role === 'Senior Developer') && (
                 <ul className="main_other_links admin">
                     <li><a onClick={() => setHidden(!hidden)} className="quicklinks">Admin</a></li>
                     <li><NavLink to="/tasks/pending" exact>Pending Tasks</NavLink></li>

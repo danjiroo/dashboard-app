@@ -18,7 +18,7 @@ const TasksRight = () => {
             <Route path="/tasks/mypending" component={MyPendingTasks} />
             <Route path="/tasks/myetc" component={MyETC} />
             <Route path="/tasks/teamtasks" component={TeamTasks} />
-            { user.role === 'Administrator' && <Route path="/tasks/pending" component={AdminPendingTasks} /> }
+            { (user.role === 'Administrator' || user.role === 'Senior Developer') && <Route path="/tasks/pending" component={AdminPendingTasks} /> }
             <Route component={NoMatch} />
         </Switch>
     )

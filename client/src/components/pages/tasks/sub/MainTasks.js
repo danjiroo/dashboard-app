@@ -3,8 +3,9 @@ import React from 'react';
 const MainTasks = () => {
     return (
         <>
-            <h3>My Tasks (temporary - no design yet)</h3>
-            <div className="main_right_con">
+            <h3>My Tasks</h3>
+            <p>Wala pa ni! Go to pending tasks instead (for admins only)!</p>
+            {/* <div className="main_right_con">
                 <div className="right_div_1">
                     <span><strong>Client</strong> Codeyuri, Inc.</span>
                     <span><strong>Created On</strong> March 19, 2020 7:27 AM</span>
@@ -52,7 +53,7 @@ const MainTasks = () => {
                         <p>No comments...</p>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }
