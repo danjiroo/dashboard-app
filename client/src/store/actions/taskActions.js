@@ -20,7 +20,6 @@ export const createTask = newtask => (dispatch, getState) => {
                 type: 'CREATE_TASK',
                 payload: res.data
             })
-            console.log(newtask)
         }
     );
 }

@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom'
 
 const Nav = ({hidden, setHidden}) => {
     const auth = useSelector(state => state.auth);
     const { user } = auth;
+    const backToTop = useRef(null);
+
+    useEffect(() => {
+        let toTop = window.addEventListener('click', () => {
+            window.scrollTo(0, 0)
+        })
+
+        return () => {
+            window.removeEventListener('click', toTop)
+        }
+    })
     
     return (
         <nav className={ hidden ? 'hidden' : null }>
@@ -23,6 +34,7 @@ const Nav = ({hidden, setHidden}) => {
                 <li><NavLink to="/settings">Settings</NavLink></li>
                 <li><NavLink to="/tasks">Tasks</NavLink></li>
             </ul>
+            <small ref={backToTop}>&rsaquo;</small>
         </nav>
     )
 }

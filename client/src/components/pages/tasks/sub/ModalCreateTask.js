@@ -33,7 +33,6 @@ const ModalCreateTask = ({setModalCreate}) => {
             return          
         }
         let newtask = { title, instruction, name }
-        console.log(newtask)
         dispatch(createTask(newtask));
         setTitle('');
         setInstruction('');

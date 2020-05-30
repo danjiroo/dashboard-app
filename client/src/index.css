@@ -1,5 +1,5 @@
 * { padding: 0; margin: 0; box-sizing: border-box; }
-html, body { height: 100%; }
+html, body { height: 100%; scroll-behavior: smooth; }
 a { text-decoration: none; }
 img { width: 100%; max-width: 100%; }
 q { quotes: none; }
@@ -13,9 +13,9 @@ table tr td { border: 1px solid #ccc; padding: 10px 20px; }
 
 body { font: 16px/25px 'Gafata', sans-serif; color: #fff; }
  
-.app_con { width: 1920px; max-width: 100%; margin: 0 auto; position: relative; min-height: 100vh; display: flex; justify-content: space-between; overflow-x: hidden; }
-.app_body { position: relative; width: calc(100% - 280px); -webkit-transition: all .3s linear; transition: all .3s linear; }
-.app_body.hidden { width: calc(100% - 50px); }
+.app_con { width: 1920px; max-width: 100%; margin: 0 auto; position: relative; min-height: 100vh; display: flex; justify-content: space-between; }
+.app_body { position: relative; width: 100%; margin-left: 280px; -webkit-transition: all .3s linear; transition: all .3s linear; }
+.app_body.hidden { margin-left: 50px; }
 
 /* login page */
 .login { width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; }
@@ -53,7 +53,7 @@ header { /*background: #219daa;*/ background: linear-gradient(to right, #219DAA,
     .header_btns span:not(:last-child) { margin-right: 20px; }
 
 /* nav area */
-nav { position: relative; width: 280px; max-width: 100%; background: linear-gradient(to top, #59bef9, #00d2aa); padding: 50px 0; -webkit-transition: all .3s linear; transition: all .3s linear; }
+nav { position: fixed; height: 100vh; z-index: 2; width: 280px; max-width: 100%; background: linear-gradient(to top, #59bef9, #00d2aa); padding: 50px 0; -webkit-transition: all .3s linear; transition: all .3s linear; }
 nav.hidden { margin-left: -230px; }
 nav .toggle { position: absolute; top: 15px; right: 10px; height: 16px; width: 30px; }
 nav .toggle:hover { cursor: pointer; }
@@ -76,13 +76,15 @@ nav ul li:nth-child(6) a::after { content: url('assets/images/icons/notes.png');
 nav ul li:nth-child(7) a::after { content: url('assets/images/icons/settings.png'); }
 nav ul li:nth-child(8) a::after { content: url('assets/images/icons/tasks.png'); }
 
+nav small:last-child { font-size: 40px; position: absolute; bottom: 5px; right: 23px; transform: rotate(-90deg); opacity: 0.7; cursor: pointer; }
+  
 /* main area */
 main { max-width: 100%; padding: 30px 30px 100px; color: #555; }
 main h2 { margin-bottom: 20px; }
-.main_con { display: flex; justify-content: space-between; flex-wrap: wrap; }
+/* .main_con { display: flex; justify-content: space-between; flex-wrap: wrap; } */
 
     /* main area - left side */
-    .main_left { width: 280px; max-width: 100%; padding-right: 30px; -webkit-transition: all .3s linear; transition: all .3s linear; }
+    .main_left { position: sticky; top: 25px; display: inline-block; vertical-align: top; width: 280px; max-width: 100%; padding-right: 30px; -webkit-transition: all .3s linear; transition: all .3s linear; }
     
     .main_left ul { margin-bottom: 10px; background: #f1f1f1; border-radius: 10px; overflow: hidden; -webkit-transition: all .3s linear; transition: all .3s linear; }
     .main_left ul li:not(:last-child) { border-bottom: 1px solid #ccc; }
@@ -133,7 +135,7 @@ main h2 { margin-bottom: 20px; }
     .main_left.hidden ul li a.quicklinks::after { content: '\00bb'; -webkit-transition: all .3s linear; transition: all .3s linear; } 
 
     /* main area - right side - MY TASK */
-    .main_right { width: calc(100% - 280px); -webkit-transition: all .3s linear; transition: all .3s linear; }
+    .main_right { display: inline-block; vertical-align: top; width: calc(100% - 280px); -webkit-transition: all .3s linear; transition: all .3s linear; }
     .main_right.hidden { width: calc(100% - 77px) }
     .main_right h2 { margin-bottom: 0; }
     .main_right h3 { display: flex; justify-content: space-between; align-items: center; padding-right: 20px; }
@@ -215,7 +217,7 @@ footer p { display: flex; justify-content: space-between; }
 }
 
 @media only screen and (max-width: 1200px) {
-    .app_body { width: calc(100% - 230px); }
+    .app_body { margin-left: 230px; }
     header { padding: 10px 20px; }
     nav { width: 230px; }
     nav.hidden { margin-left: -180px; }
@@ -235,8 +237,9 @@ footer p { display: flex; justify-content: space-between; }
 @media only screen and (max-width: 1000px) {
     nav { margin-left: -180px; }
     nav.hidden { margin-left: 0; }
-    .app_body { width: calc(100% - 50px); }
-    .app_body.hidden { width: calc(100%); margin-right: -230px; }
+    .app_con { overflow-x: hidden; }
+    .app_body { margin-left: 0; left: 50px; width: calc(100% - 50px); }
+    .app_body.hidden { margin-left: 0; left: 230px; }
     .main_left { width: 66px; }
     .main_left.hidden { width: 210px; }
     .main_right { width: calc(100% - 66px); }
