@@ -1,11 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-const TasksLeft = ({hidden, setHidden}) => {
-    const auth = useSelector(state => state.auth);
-    const { user } = auth;
-
+const TasksLeft = ({hidden, setHidden, user}) => {
     return (
         <>
             <div className="main_left_top">

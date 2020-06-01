@@ -1,5 +1,6 @@
 const initState = {
     tasks: [],
+    assignedTasks: [],
     loading: false
 }
 
@@ -22,6 +23,30 @@ const taskReducer = (state = initState, action) => {
             return {
                 ...state,
                 tasks: state.tasks.filter(task => task._id !== action.payload)
+            }
+        }
+        case 'GET_ASSIGNED_TASK': {
+            return {
+                ...state,
+                assignedTasks: action.payload,
+                loading: false
+            }
+        }
+        case 'ASSIGN_TASK': {
+            return {
+                ...state,
+                assignedTasks: [ action.payload, ...state.assignedTasks ]
+            }
+        }
+        case 'RE_ASSIGN_TASK': {
+            return {
+                ...state,
+                assignedTasks: state.assignedTasks.filter(task => {
+                    if (task._id === action.payload.id) {
+                        task.assignedTo = action.payload.assignedTo
+                    }
+                    return { ...state.assignedTasks, task }
+                })
             }
         }
         case 'LOADING_TASK': {

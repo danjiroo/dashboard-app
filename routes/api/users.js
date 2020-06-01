@@ -1,10 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 // Item Model
 const User = require('../../models/User');
+
+// @route   GET api/auth/user
+// @desc    Get all users
+// @access  Public
+router.get('/', (req, res) => {
+    User.find()
+        // .sort({ name: 1})
+        .then(users => res.json(users));
+});
 
 // @route   POST api/users
 // @desc    Register new user

@@ -34,6 +34,40 @@ export const deleteTask = id => (dispatch, getState) => {
     );
 }
 
+export const getAssignedTask = () => dispatch => {
+    dispatch(setLoadingTask())
+    axios.get('/api/assignedTasks')
+        .then(res => 
+            dispatch({
+                type: 'GET_ASSIGNED_TASK',
+                payload: res.data
+            })
+        )
+        .catch(err => dispatch(returnError(err.response.data, err.response.status)))
+}
+
+export const assignTask = newAssignedtask => (dispatch, getState) => {
+    axios.post('/api/assignedTasks', newAssignedtask, tokenConfig(getState)).then(res => {
+            dispatch({
+                type: 'ASSIGN_TASK',
+                payload: res.data
+            })
+        }
+    );
+    dispatch(deleteTask(newAssignedtask.id))
+}
+
+export const reAssignTask = newAssignedTask => (dispatch, getState) => {
+    axios.put(`/api/assignedTasks/${newAssignedTask.id}`, newAssignedTask, tokenConfig(getState)).then(res => {
+            dispatch({
+                type: 'RE_ASSIGN_TASK',
+                payload: res.data
+            })
+        }
+    );
+    dispatch(getAssignedTask())
+}
+
 export const setLoadingTask = () => {
     return {
         type: 'LOADING_TASK'
