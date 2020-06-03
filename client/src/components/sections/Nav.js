@@ -6,6 +6,7 @@ const Nav = ({hidden, setHidden}) => {
     const auth = useSelector(state => state.auth);
     const { user } = auth;
     const backToTop = useRef(null);
+    const bodyRef = useRef(null);
 
     useEffect(() => {
         let toTop = backToTop.current.addEventListener('click', () => {
@@ -16,9 +17,24 @@ const Nav = ({hidden, setHidden}) => {
             backToTop.current.removeEventListener('click', toTop)
         }
     })
+
+    useEffect(() => {
+        const handleClickOutside = e => {
+          if( window.innerWidth <= 600 ) {
+            if (bodyRef.current && !bodyRef.current.contains(e.target)) {
+                setHidden(false)
+              }
+          }
+        }
+    
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [bodyRef]);
     
     return (
-        <nav className={ hidden ? 'hidden' : null }>
+        <nav ref={bodyRef} className={ hidden ? 'hidden' : null }>
             <div className="toggle" onClick={() => setHidden(!hidden)}>
                 <span></span>
             </div>

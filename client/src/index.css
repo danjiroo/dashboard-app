@@ -218,7 +218,6 @@ main { max-width: 100%; color: #555; margin-top: 45px; }
     .styledform form label { width: 50%; padding: 20px; display: flex; flex-direction: column; font-family: 'Carrois Gothic SC', sans-serif; font-weight: 300; text-transform: uppercase; }
     .styledform form label q { margin-bottom: 15px; }
     .styledform form label input { padding: 15px; border: none; border: 1px solid #ddd !important; }
-    .styledform form label input:focus { border: 1px solid #0e7fe1 }
     .styledform form button { width: 180px; max-width: 100%; background: #00ac94; color: #fff; border: none; box-shadow: 0 2px 5px rgba(0, 123, 123, 0.2); padding: 15px; margin: 30px auto; cursor: pointer; border-radius: 7px; -webkit-transition: all .3s linear; transition: all .3s linear; }
     .styledform form button:hover { background: #169FA4; }
     .styledform .spanerror { top: auto; bottom: 25px; width: 100%; text-align: center; }
@@ -236,7 +235,7 @@ main { max-width: 100%; color: #555; margin-top: 45px; }
     .modal_body h3 { margin-bottom: 15px; padding-right: 0; }
     .modal_body label { display: flex; flex-direction: column; margin-bottom: 10px; position: relative; }
     .modal_body label input, .modal_body textarea { margin-top: 10px; padding: 10px; border-radius: 5px; border: 1px solid rgba(0, 0, 0, 0.2); }
-    .modal_body label input:focus { border: 1px solid #0e7fe1 }
+    .modal_body label input:focus { border: 1px solid #0e7fe1 !important }
     .modal_body label q { display: inline-block; }
     .modal_body input[type="submit"], .modal_body button { width: 150px; max-width: 100%; background: teal; border: 0; border-radius: 5px; color: #fff; padding: 10px; margin: 25px auto 0; display: block; cursor: pointer; -webkit-transition: all .3s linear; transition: all .3s linear; }
     .modal_body input[type="submit"]:hover, .modal_body button:hover { background: #333; }
