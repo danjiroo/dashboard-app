@@ -6,7 +6,9 @@ import InboxRight from './InboxRight';
 const Inbox = ({hidden, setHidden}) => {
     return (
         <>
-            <h2>Inbox</h2>
+            <div className="main_head">
+                <h2>Inbox</h2>
+            </div>
             <div className="main_con inbox">
                 <div className={ hidden ? 'hidden main_left' : 'main_left' }>
                     <InboxLeft hidden={hidden} setHidden={setHidden} />

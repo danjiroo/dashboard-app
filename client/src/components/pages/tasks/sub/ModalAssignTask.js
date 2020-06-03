@@ -44,7 +44,7 @@ const ModalAssignTask = ({setModalAssign, assignedTask, assign}) => {
                         <span>x</span>
                     </div>
                     <div className="modal_body">
-                        <h3>Assign Task</h3>
+                        { assign === 'reassign' ? <h3>Re-Assign Task</h3> : <h3>Assign Task</h3> }
                         <p>Select developer in the dropdown below: { error && <span className="spanerror">Please select a developer.</span> }</p>
                         <form onSubmit={handleSubmit}>
                             <select onChange={handleSelectDev} value={developer}>

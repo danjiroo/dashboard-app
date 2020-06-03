@@ -1,14 +1,16 @@
 import React from 'react';
 
-const Payroll = () => {
+const MainAttendance = () => {
     return (
         <>
-            <h3>Attendance</h3>
-            <div className="main_right_con">
-                <p>...</p>
+            <div className="main_right_con col-4">
+                <div className="styledtitle">
+                    <h3>Attendance</h3>
+                </div>
+                <p className="underconst">This page is still in progress....</p>
             </div>
         </>
     )
 }
 
-export default Payroll
+export default MainAttendance

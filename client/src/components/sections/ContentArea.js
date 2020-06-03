@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from '../pages/Home';
 import Attendance from '../pages/attendance/Attendance';
 import Calendar from '../pages/calendar/Calendar';
+import Employees from '../pages/employees/Employees';
 import Inbox from '../pages/inbox/Inbox';
 import Metrics from '../pages/metrics/Metrics';
 import Notes from '../pages/notes/Notes';
@@ -21,6 +22,7 @@ const ContentArea = () => {
                 <Route path="/" exact render={props => <Home hidden={hidden} setHidden={setHidden} />} />
                 <Route path="/attendance" render={props => <Attendance hidden={hidden} setHidden={setHidden} />} />
                 <Route path="/calendar" render={props => <Calendar hidden={hidden} setHidden={setHidden} />} />
+                <Route path="/employees" render={props => <Employees hidden={hidden} setHidden={setHidden} />} />
                 <Route path="/inbox" render={props => <Inbox hidden={hidden} setHidden={setHidden} />} />
                 <Route path="/metrics" render={props => <Metrics hidden={hidden} setHidden={setHidden} />} />
                 <Route path="/notes" render={props => <Notes hidden={hidden} setHidden={setHidden} />} />

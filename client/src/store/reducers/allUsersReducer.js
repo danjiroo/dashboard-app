@@ -12,6 +12,31 @@ const allUsersReducer = (state = initState, action) => {
                 loading: false
             }
         }
+        case 'CREATE_USER': {
+            return {
+                ...state,
+                users: [ action.payload, ...state.users ]
+            }
+        }
+        case 'MODIFY_USER': {
+            return {
+                ...state,
+                users: state.users.filter(user => {
+                    if (user._id === action.payload.id) {
+                        user.name = action.payload.name
+                        user.role = action.payload.role
+                        user.email = action.payload.email
+                    }
+                    return { ...state.users, user }
+                })
+            }
+        }
+        case 'DELETE_USER': {
+            return {
+                ...state,
+                users: state.users.filter(user => user._id !== action.payload)
+            }
+        }
         case 'LOADING_USERS': {
             return {
                 ...state,

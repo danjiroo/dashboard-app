@@ -34,16 +34,16 @@ const AdminPendingTasks = () => {
     const fetchTasks = tasks.length ? (tasks.map(task => {
         return (
             <li key={task._id}>
-                <div>
+                <div className="tasktitle">
                     <strong>{task.title}</strong>
                     <div className="created">
                         <small>Created by: {task.createdBy}</small>
                         <small>{moment(task.date).format('LLLL')}</small>
                     </div>
                 </div>
-                <div className="instruction">{ReactHtmlParser(task.instruction)}</div>
+                <div className="taskinstruction">{ReactHtmlParser(task.instruction)}</div>
                 {/* <div className="instruction" dangerouslySetInnerHTML={{ __html: task.instruction }}></div> */}
-                <div>
+                <div className="taskactions">
                     <button onClick={() => handleAssign(task._id, task.title, task.instruction, task.createdBy)}>Assign</button>
                     <button onClick={() => handleDelete(task._id)}>Delete</button>
                 </div>  

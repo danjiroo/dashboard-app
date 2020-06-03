@@ -1,59 +1,81 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import ReactHtmlParser from 'react-html-parser';
+import moment from 'moment';
+
+import ModalAssignTask from './ModalAssignTask';
+
+import { getAssignedTask, createTask, deleteAssignedTask } from '../../../../store/actions/taskActions';
 
 const MainTasks = () => {
+    const auth = useSelector(state => state.auth);
+    const { user } = auth;
+
+    const [modalAssign, setModalAssign] = useState(false);
+    const [assignedTask, setAssignedTask] = useState({});
+    const dispatch = useDispatch();
+
+    const { assignedTasks } = useSelector(state => state.task);
+
+    const handleReAssign = (id, title, instruction, name) => {
+        setModalAssign(true)
+        setAssignedTask({ id, title, instruction, name })
+    }
+
+    const handleUnAssign = (id, title, instruction, name) => {
+        dispatch(createTask({ id, title, instruction, name }))
+        dispatch(deleteAssignedTask(id))
+    }
+
+    useEffect(() => {
+        dispatch(getAssignedTask())
+    }, [])
+    
+    const fetchAssignedTasks = assignedTasks.length ? assignedTasks
+        .filter(assignedTask => assignedTask.assignedTo === user.name)
+        .map(owntask => {
+            return (
+                <li key={owntask._id}>
+                    <div className="taskdev">{owntask.assignedTo}</div>
+                    <div className="tasktitle">
+                        <strong>{owntask.title}</strong>
+                        <div className="created">
+                            <small>Created by: <b>{owntask.createdBy}</b></small>
+                            <small>{moment(owntask.date).format('LLLL')}</small>
+                        </div>
+                    </div>
+                    <div className="taskinstruction">{ReactHtmlParser(owntask.instruction)}</div>
+                    {/* <div className="instruction" dangerouslySetInnerHTML={{ __html: owntask.instruction }}></div> */}
+                    { (user.role === 'Administrator' || user.role === 'Senior Developer') && (
+                        <div className="taskactions">
+                            <button onClick={() => handleReAssign(owntask._id, owntask.title, owntask.instruction, owntask.createdBy)}>Re-assign</button>
+                            <button onClick={() => handleUnAssign(owntask._id, owntask.title, owntask.instruction, owntask.createdBy)}>Un-assign</button>
+                        </div>
+                    )}
+                </li>
+            )
+        }
+    ) : (
+        <li className="stylednoresult">No task found...</li>
+    )
+
     return (
         <>
-            <h3>My Tasks</h3>
-            <p>Wala pa ni! Go to pending tasks instead (for admins only)!</p>
-            {/* <div className="main_right_con">
-                <div className="right_div_1">
-                    <span><strong>Client</strong> Codeyuri, Inc.</span>
-                    <span><strong>Created On</strong> March 19, 2020 7:27 AM</span>
-                    <span><strong>Assigned On</strong> March 19, 2020 7:27 AM</span>
+            { modalAssign && <ModalAssignTask setModalAssign={setModalAssign} assignedTask={assignedTask} assign={'reassign'} /> }
+            <div className="main_right_con col-4">
+                <div className="styledtitle">
+                    <h3>My Tasks</h3>
                 </div>
-                <div className="right_div_2">
-                    <span><strong>Status</strong> Pending</span>
-                    <span><strong>Assigned To</strong> Danilo</span>
-                    <span><strong>Created By</strong> Amie</span>
+                <div className="styledsubtitle">
+                    <span>Dev</span>
+                    <span>Title</span>
+                    <span>Instructions</span>
+                    { (user.role === 'Administrator' || user.role === 'Senior Developer') && <span>Actions</span> }
                 </div>
-                <div className="right_div_3">
-                    <span><strong>Attachment</strong> no attachment(s)</span>
-                    <span><strong>QA Buddy</strong> -</span>
-                    <span><strong>QA Buddy</strong> -</span>
-                </div>
-                <div className="right_div_4">
-                    <h4>Instructions</h4>
-                    <ul>
-                        <li>No instrux...</li>
-                        <li>No instrux...</li>
-                    </ul>
-                </div>
-                <div className="right_div_5">
-                    <h4>Task &amp; URL</h4>
-                    <p>Email updates...</p>
-                </div>
-                <div className="right_div_6">
-                    <div className="time_tracker">
-                        <h4>Time Tracker</h4>
-                        <p><span>09:01 AM</span> <span>09:16 AM</span></p>
-                        <p><span>06:35 PM</span> <span>06:35 PM</span></p>
-                    </div>
-                    <div className="next_step">
-                        <h4>Next Step</h4>
-                        <p>For Review</p>
-                    </div>
-                </div>
-                <div className="right_div_7">
-                    <div className="note">
-                        <h4>Additional Info</h4>
-                        <p>No additional info...</p>
-                    </div>
-                    <div className="comments">
-                        <h4>Comments</h4>
-                        <p>No comments...</p>
-                    </div>
-                </div>
-            </div> */}
+                <ul className="styledul">
+                    { fetchAssignedTasks }
+                </ul>
+            </div>
         </>
     )
 }

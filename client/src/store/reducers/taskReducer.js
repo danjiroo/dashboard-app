@@ -28,7 +28,7 @@ const taskReducer = (state = initState, action) => {
         case 'GET_ASSIGNED_TASK': {
             return {
                 ...state,
-                assignedTasks: action.payload,
+                assignedTasks: action.payload.sort((a, b) => (a.assignedTo > b.assignedTo) ? 1 : -1),
                 loading: false
             }
         }
@@ -47,6 +47,12 @@ const taskReducer = (state = initState, action) => {
                     }
                     return { ...state.assignedTasks, task }
                 })
+            }
+        }
+        case 'DELETE_ASSIGNED_TASK': {
+            return {
+                ...state,
+                assignedTasks: state.assignedTasks.filter(assignedTask => assignedTask._id !== action.payload)
             }
         }
         case 'LOADING_TASK': {

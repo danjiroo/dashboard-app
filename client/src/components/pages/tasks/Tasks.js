@@ -16,7 +16,7 @@ const Tasks = ({hidden, setHidden}) => {
     return (
         <>
             <div className="main_head">
-                <h2>Attendance</h2>
+                <h2>Tasks</h2>
                 {
                     (user.role === 'Administrator' || user.role === 'Senior Developer')
                     && <Route path="/tasks/pending" component={adminCreateBtn} />
@@ -27,7 +27,7 @@ const Tasks = ({hidden, setHidden}) => {
                     <TasksLeft hidden={hidden} setHidden={setHidden} user={user} />
                 </div>
                 <div className={ hidden ? 'hidden main_right' : 'main_right' }>
-                    <TasksRight/>
+                    <TasksRight user={user} />
                 </div>
             </div>
             { modalCreate && <ModalCreateTask setModalCreate={setModalCreate} /> }

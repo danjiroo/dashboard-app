@@ -20,29 +20,6 @@ export const loadUser = () => (dispatch, getState) => {
         })
 }
 
-export const register = (name, email, password, role) => dispatch => {
-    const config = {
-        headers: {
-            "Content-type": "application/json"
-        }
-    }
-
-    const body = JSON.stringify({name, email, password, role});
-
-    axios.post('/api/users', body, config)
-        .then(res => dispatch({
-            type: 'REGISTER_SUCCESS',
-            payload: res.data
-        }))
-        .then(res => dispatch({
-            type: 'CLEAR_ERROR'
-        }))
-        .catch(err => {
-            dispatch(returnError(err.response.data, err.response.status, 'REGISTER_FAILED'));
-            dispatch({ type: 'REGISTER_FAILED' });
-        })
-}
-
 export const login = (email, password) => dispatch => {
     const config = {
         headers: {
@@ -91,3 +68,26 @@ export const tokenConfig = getState => {
 
     return config;
 }
+
+//  export const register = ({name, email, password, role}) => dispatch => {
+//     const config = {
+//         headers: {
+//             "Content-type": "application/json"
+//         }
+//     }
+
+//     const body = JSON.stringify({name, email, password, role});
+
+//     axios.post('/api/users', body, config)
+//         .then(res => dispatch({
+//             type: 'REGISTER_SUCCESS',
+//             payload: res.data
+//         }))
+//         .then(res => dispatch({
+//             type: 'CLEAR_ERROR'
+//         }))
+//         .catch(err => {
+//             dispatch(returnError(err.response.data, err.response.status, 'REGISTER_FAILED'));
+//             // dispatch({ type: 'REGISTER_FAILED' });
+//         })
+// }

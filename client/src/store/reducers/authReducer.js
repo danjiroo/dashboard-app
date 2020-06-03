@@ -20,7 +20,7 @@ const authReducer = (state = initState, action) => {
                 user: action.payload
             }
         case 'LOGIN_SUCCESS':
-        case 'REGISTER_SUCCESS':
+        // case 'REGISTER_SUCCESS':
             localStorage.setItem('token', action.payload.token);
             localStorage.setItem('isAuthenticated', true);
             localStorage.setItem('user', action.payload);
@@ -33,7 +33,7 @@ const authReducer = (state = initState, action) => {
         case 'AUTH_ERROR':
         case 'LOGIN_FAILED':
         case 'LOGOUT_SUCCESS':
-        case 'REGISTER_FAILED':
+        // case 'REGISTER_FAILED':
             localStorage.removeItem('token');
             localStorage.removeItem('isAuthenticated');
             localStorage.removeItem('user');

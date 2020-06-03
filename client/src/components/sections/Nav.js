@@ -28,6 +28,7 @@ const Nav = ({hidden, setHidden}) => {
                 <li><NavLink exact to="/">Home</NavLink></li>
                 <li><NavLink to="/attendance">Attendance</NavLink></li>
                 <li><NavLink to="/calendar">Calendar</NavLink></li>
+                <li><NavLink to="/employees">Employees</NavLink></li>
                 <li><NavLink to="/inbox">Inbox</NavLink></li>
                 <li><NavLink to="/metrics">Metrics</NavLink></li>
                 <li><NavLink to="/notes">Notes</NavLink></li>

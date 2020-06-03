@@ -68,6 +68,16 @@ export const reAssignTask = newAssignedTask => (dispatch, getState) => {
     dispatch(getAssignedTask())
 }
 
+export const deleteAssignedTask = id => (dispatch, getState) => {
+    axios.delete(`/api/assignedTasks/${id}`, tokenConfig(getState)).then(res => {
+            dispatch({
+                type: 'DELETE_ASSIGNED_TASK',
+                payload: id
+            })
+        }
+    );
+}
+
 export const setLoadingTask = () => {
     return {
         type: 'LOADING_TASK'

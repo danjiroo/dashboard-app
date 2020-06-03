@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const auth = require('../../middleware/auth');
 
 // Item Model
 const User = require('../../models/User');
@@ -12,6 +13,7 @@ const User = require('../../models/User');
 router.get('/', (req, res) => {
     User.find()
         // .sort({ name: 1})
+        .select('-password')
         .then(users => res.json(users));
 });
 
@@ -67,5 +69,28 @@ router.post('/', (req, res) => {
             })
         })
 });
+
+// @route   PUT api/users
+// @desc    Modify a user
+// @access  Private
+router.put('/:id', auth, (req, res) => {
+    User.findByIdAndUpdate(req.params.id, {
+        name: req.body.name, 
+        role: req.body.role, 
+        email: req.body.email
+    }, function (err, user) {
+        if (err) return res.status(500).send('Invalid user ID');
+        res.status(200).send(user);
+    });
+})
+
+// @route   DELETE api/users
+// @desc    Delete a user
+// @access  Private
+router.delete('/:id', auth, (req, res) => {
+    User.findById(req.params.id)
+        .then(user => user.remove().then(() => res.json({success: true})))
+        .catch(err => res.status(404).json({success: false}));
+})
 
 module.exports = router;

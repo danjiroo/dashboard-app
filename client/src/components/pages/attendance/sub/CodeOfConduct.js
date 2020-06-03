@@ -3,9 +3,11 @@ import React from 'react';
 const CodeOfConduct = () => {
     return (
         <>
-            <h3>Code Of Conduct</h3>
-            <div className="main_right_con">
-                <p>...</p>
+            <div className="main_right_con col-4">
+                <div className="styledtitle">
+                    <h3>Code Of Conduct</h3>
+                </div>
+                <p className="underconst">This page is still in progress....</p>
             </div>
         </>
     )
