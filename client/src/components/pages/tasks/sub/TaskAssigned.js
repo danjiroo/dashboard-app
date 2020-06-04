@@ -20,6 +20,7 @@ const TaskAssigned = () => {
 
     const { id } = useParams();
     const { assignedTasks } = useSelector(state => state.task);
+    const { user } = useSelector(state => state.auth);
     const dispatch = useDispatch();
 
     const handleReAssign = task => {
@@ -83,6 +84,7 @@ const TaskAssigned = () => {
                                     <div className="divinstruction">{ReactHtmlParser(task.instruction)}</div>
                                 </div>
                             </li>
+                            { (user.role === 'Administrator' || user.role === 'Senior Developer') && (
                             <li>
                                 <div className="divgroup">
                                     <strong>Admin Actions</strong>
@@ -92,7 +94,7 @@ const TaskAssigned = () => {
                                         <button onClick={() => handleUnAssign(task)}>Un-assign</button>
                                     </div>
                                 </div>
-                            </li>
+                            </li> )}
                         </ul>
                     </div>
                 )

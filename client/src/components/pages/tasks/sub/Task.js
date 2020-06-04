@@ -20,6 +20,7 @@ const Task = () => {
 
     const { id } = useParams();
     const { tasks } = useSelector(state => state.task);
+    const { user } = useSelector(state => state.auth);
     const dispatch = useDispatch();
 
     const handleDelete = id => {
@@ -80,6 +81,7 @@ const Task = () => {
                                     <div className="divinstruction">{ReactHtmlParser(task.instruction)}</div>
                                 </div>
                             </li>
+                            { (user.role === 'Administrator' || user.role === 'Senior Developer') && (
                             <li>
                                 <div className="divgroup">
                                     <strong>Admin Actions</strong>
@@ -89,7 +91,7 @@ const Task = () => {
                                         <button onClick={() => handleDelete(task._id)}>Delete</button>
                                     </div>
                                 </div>
-                            </li>
+                            </li> )}
                         </ul>
                     </div>
                 )

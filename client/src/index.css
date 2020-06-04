@@ -366,7 +366,7 @@ footer p { display: flex; justify-content: space-between; }
     .main_right_con ul.styledul li > div { flex: 100% !important; padding: 0 !important; }
     .main_right_con ul.styledul li > div:not(:first-child) { padding-top: 15px !important; border-left: none !important; border-top: 1px solid rgba(0, 0, 0, 0.1) }
     .main_right_con ul.styledul li > div:not(:last-child) { padding-bottom: 15px !important; }
-    .main_right_con ul.styledul li div.taskactions button:nth-child(2) { margin-top: 0; margin-left: 10px; }
+    .main_right_con ul.styledul li div.taskactions button:not(:first-child) { margin-top: 0; margin-left: 10px; }
     .main_right_con ul.styledul li div.taskactions { display: flex; }
     .main_right_con .styledsubtitle { display: none; }
     .styledform form label { width: 100%; padding: 10px 0; }
@@ -404,6 +404,9 @@ footer p { display: flex; justify-content: space-between; }
     .main_right { width: 100%; margin-left: 0; }
     .main_right.hidden { margin-right: 0; margin-left: 0; }
     .main_right h3 { padding-right: 0; }
+    .main_right_con ul.styledul li div.taskactions { flex-wrap: wrap }
+    .main_right_con ul.styledul li div.taskactions button {  max-width: 100% ; }
+    .main_right_con ul.styledul li div.taskactions button:not(:first-child) { margin-top: 5px; margin-left: 0; }
 
     .main_right .nomatch, .nomatch { margin-left: 0; }
 
