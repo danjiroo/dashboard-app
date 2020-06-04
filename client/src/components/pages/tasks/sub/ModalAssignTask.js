@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { assignTask, reAssignTask } from '../../../../store/actions/taskActions';
 import { getAllUsers } from '../../../../store/actions/allUsersActions';
@@ -10,6 +11,7 @@ const ModalAssignTask = ({setModalAssign, assignedTask, assign}) => {
     const [error, setError] = useState(false);
     const users = useSelector(state => state.user);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleSelectDev = e => {
         setError(false)
@@ -26,12 +28,16 @@ const ModalAssignTask = ({setModalAssign, assignedTask, assign}) => {
             setError(true);
             return          
         }
-        let newAssignedTask = { ...assignedTask, assignedTo: developer }
+        let reAssignedTo = { ...assignedTask, assignedTo: developer }
         if (assign === 'reassign') {
-            dispatch(reAssignTask(newAssignedTask))
+            dispatch(reAssignTask(reAssignedTo))
         } else {
-            dispatch(assignTask(newAssignedTask))
+            dispatch(assignTask(reAssignedTo))
+            setTimeout(() => {
+                history.push('/tasks/pending')
+            }, 500)
         }
+        setDeveloper('')
         setModalAssign(false)
         setError(false)
     }
@@ -53,7 +59,7 @@ const ModalAssignTask = ({setModalAssign, assignedTask, assign}) => {
                                     return <option key={user._id} value={user.name}>{user.name}</option>
                                 }) }
                             </select>
-                            <button type="submit">Assign</button>
+                            <button type="submit">Re-assign</button>
                         </form>
                     </div>
                 </div>

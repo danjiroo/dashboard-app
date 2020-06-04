@@ -24,6 +24,17 @@ export const createTask = newtask => (dispatch, getState) => {
     );
 }
 
+export const editTask = modifyTask => (dispatch, getState) => {
+    axios.put(`/api/tasks/${modifyTask._id}`, modifyTask, tokenConfig(getState)).then(res => {
+            dispatch({
+                type: 'MODIFY_TASK',
+                payload: res.data
+            })
+        }
+    );
+    dispatch(getTask())
+}
+
 export const deleteTask = id => (dispatch, getState) => {
     axios.delete(`/api/tasks/${id}`, tokenConfig(getState)).then(res => {
             dispatch({
@@ -54,11 +65,22 @@ export const assignTask = newAssignedtask => (dispatch, getState) => {
             })
         }
     );
-    dispatch(deleteTask(newAssignedtask.id))
+    dispatch(deleteTask(newAssignedtask._id))
+}
+
+export const editAssignedTask = modifyAssignedTask => (dispatch, getState) => {
+    axios.put(`/api/assignedTasks/${modifyAssignedTask._id}`, modifyAssignedTask, tokenConfig(getState)).then(res => {
+            dispatch({
+                type: 'MODIFY_ASSIGNED_TASK',
+                payload: res.data
+            })
+        }
+    );
+    dispatch(getAssignedTask())
 }
 
 export const reAssignTask = newAssignedTask => (dispatch, getState) => {
-    axios.put(`/api/assignedTasks/${newAssignedTask.id}`, newAssignedTask, tokenConfig(getState)).then(res => {
+    axios.put(`/api/assignedTasks/dev/${newAssignedTask._id}`, newAssignedTask, tokenConfig(getState)).then(res => {
             dispatch({
                 type: 'RE_ASSIGN_TASK',
                 payload: res.data

@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // ck editor
 import CKEditor from '@ckeditor/ckeditor5-react';
 import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document';
 
-// redux store
-import { createTask } from '../../../../store/actions/taskActions';
+import { editTask, editAssignedTask } from '../../../../store/actions/taskActions';
 
-const ModalCreateTask = ({setModalCreate}) => {
-    const auth = useSelector(state => state.auth);
-    const { name } = auth.user;
-    const [title, setTitle] = useState('');
-    const [instruction, setInstruction] = useState('');
+const ModalModifyTask = ({setModalModifyTask, modifyTask, modify}) => {
+    const [title, setTitle] = useState(modifyTask.title);
+    const [instruction, setInstruction] = useState(modifyTask.instruction);
     const [error, setError] = useState(false);
     const dispatch = useDispatch();
-    
+
     const handleTitleChange = e => {
         setError(false)
         setTitle(e.target.value)
@@ -32,11 +29,15 @@ const ModalCreateTask = ({setModalCreate}) => {
             setError(true);
             return          
         }
-        let newtask = { title, instruction, createdBy: name }
-        dispatch(createTask(newtask));
+        let modifiedTask = { ...modifyTask, title, instruction }
+        if (modify === 'remodify') {
+            dispatch(editAssignedTask(modifiedTask))
+        } else {
+            dispatch(editTask(modifiedTask))
+        }
         setTitle('');
         setInstruction('');
-        setModalCreate(false)
+        setModalModifyTask(false)
         setError(false)
     }
 
@@ -44,7 +45,7 @@ const ModalCreateTask = ({setModalCreate}) => {
         <div className="modal createtask">
             <div className="modal_con">
                 <div className="modal_div">
-                    <div className="modal_close" onClick={() => setModalCreate(false)}>
+                    <div className="modal_close" onClick={() => setModalModifyTask(false)}>
                         <span>x</span>
                     </div>
                     <div className="modal_body">
@@ -69,6 +70,7 @@ const ModalCreateTask = ({setModalCreate}) => {
                                         const data = editor.getData();
                                         handleInstructionChange(data)
                                     }}
+                                    data={instruction}
                                     editor={ DecoupledEditor }
                                     config={
                                         {
@@ -148,7 +150,7 @@ const ModalCreateTask = ({setModalCreate}) => {
                                     }
                                 />
                             </label>
-                            <input type="submit" value="Create Task" />
+                            <input type="submit" value="Modify Task" />
                         </form>
                     </div>
                 </div>
@@ -157,4 +159,4 @@ const ModalCreateTask = ({setModalCreate}) => {
     )
 }
 
-export default ModalCreateTask
+export default ModalModifyTask

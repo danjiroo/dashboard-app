@@ -21,11 +21,21 @@ router.post('/', auth, (req, res) => {
     const newTask = new Task({
         title: req.body.title,
         instruction: req.body.instruction,
-        createdBy: req.body.name
+        createdBy: req.body.createdBy
     });
 
     newTask.save().then(task => res.json(task));
 });
+
+// @route   PUT api/tasks
+// @desc    Modify a task
+// @access  Private
+router.put('/:id', auth, (req, res) => {
+    Task.findByIdAndUpdate(req.params.id, {title: req.body.title, instruction: req.body.instruction}, function (err, task) {
+        if (err) return res.status(500).send('Invalid task ID');
+        res.status(200).send(task);
+    });
+})
 
 // @route   DELETE api/tasks
 // @desc    Delete a Task

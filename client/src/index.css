@@ -5,7 +5,7 @@ img { width: 100%; max-width: 100%; }
 q { quotes: none; }
 h1, h2, h3, h4, h5, h6 { font-family: 'Carrois Gothic SC', sans-serif; font-weight: 600; text-transform: uppercase; }
 textarea { font: 15px/25px 'Gafata', sans-serif; }
-blockquote{ width: 80%; max-width: 100%; margin: 10px 0; font-style: italic; padding: 10px 10px 10px 50px !important; border-left: none !important; line-height:1.6; position: relative; }
+blockquote{ width: 80%; max-width: 100%; margin: 10px 0; font-style: italic; padding: 10px 10px 10px 50px !important; border-left: none !important; line-height:1.6; position: relative; word-break: break-word; }
 blockquote::before{ font-family: Arial; content: "\201C"; color: #78C0A8; font-size:4em; position: absolute; left: 10px; top:-10px; }
 blockquote::after{ content: ''; }
 table { margin: 10px 0; }
@@ -185,8 +185,9 @@ main { max-width: 100%; color: #555; margin-top: 45px; }
     .main_right_con ul.styledul li div.taskinstruction { max-height: 250px; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; }
     .main_right_con ul.styledul li div.taskinstruction::-webkit-scrollbar { width: 0; height: 0; }
     .main_right_con ul.styledul li div.taskactions button { display: block; max-height: 36px; width: 100%; max-width: 120px; padding: 10px; background: #26c7ba; color: #fff; border: none; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 133, 133, 0.4); cursor: pointer; -webkit-transition: all .3s linear; transition: all .3s linear; }
-    .main_right_con ul.styledul li div.taskactions button:nth-child(2) { margin-top: 5px; background: #219DAA }
-    .main_right_con ul.styledul li div.taskactions button:hover { background: #137A7D; }
+    .main_right_con ul.styledul li div.taskactions button:not(:first-child) { margin-top: 5px; background: #219DAA }
+    .main_right_con ul.styledul li div.taskactions button:last-child { background: teal; }
+    .main_right_con ul.styledul li div.taskactions button:hover { background: #0f6064; }
     .main_right_con ul.styledul li div a { color: #0d776e }
     .main_right_con ul.styledul li div a:hover { color: #777 }
 
@@ -194,6 +195,7 @@ main { max-width: 100%; color: #555; margin-top: 45px; }
     .main_right_con ul.styledul ol { padding-left: 15px; }
     .main_right_con ul.styledul ul { padding-left: 25px; }
     .main_right_con ul figure.table { overflow-x: auto; }
+    /* .main_right_con ul figure.table > table { width: 100%; } */
 
     /* NTH-CHILD FOR WIDTHS */
     /* 3-COLUMN HEADING and LIST BODY (DEFAULT) */
@@ -222,15 +224,31 @@ main { max-width: 100%; color: #555; margin-top: 45px; }
     .styledform form button:hover { background: #169FA4; }
     .styledform .spanerror { top: auto; bottom: 25px; width: 100%; text-align: center; }
     .modal .styledform { padding: 0; box-shadow: none; }
+
     /* no content */
     .underconst { padding: 20px; box-shadow: 0 2px 7px rgba(0, 123, 123, 0.3); }
+
+    /* view single task */
+    ul.viewtask { box-shadow: 0 2px 7px rgba(0, 123, 123, 0.3); padding-bottom: 30px }
+    ul.viewtask > li { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; }
+    ul.viewtask li .divgroup { flex: 1; padding: 20px; overflow-x: auto; position: relative; z-index: 0; }
+    ul.viewtask > li:not(:first-child) { border-top: 1px solid #ddd; }
+    ul.viewtask li:nth-child(1) .divgroup:first-child, ul.viewtask li:nth-child(2) .divgroup:first-child { border-right: 1px solid #ddd; }
+    ul.viewtask li .divgroup strong { font-family: 'Carrois Gothic SC', sans-serif; font-weight: 300; text-transform: uppercase; }
+    ul.viewtask li .divgroup div { margin-top: 5px; }
+    ul.viewtask li .divgroup div ol, ul.viewtask li .divgroup div ul { padding-left: 20px; }
+    ul.viewtask li .divgroup div button { width: 120px; max-width: 100%; padding: 10px; background: #26c7ba; color: #fff; border: none; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 133, 133, 0.4); cursor: pointer; -webkit-transition: all .3s linear; transition: all .3s linear; }
+    ul.viewtask li .divgroup div button:not(:first-child) { margin-left: 5px; background: #219DAA }
+    ul.viewtask li .divgroup div button:last-child { background: teal; }
+    ul.viewtask li .divgroup div button:hover { background: #0f6064; }
+    ul.viewtask li .divgroup .divinstruction { min-height: 100px; }
 
     /* modal create task */
     .modal { display: flex; justify-content: center; align-items: center; overflow-x: hidden; position: fixed; width: 100%; height: 100vh; top: 0; right: 0; left: 0; bottom: 0; background: rgba(0, 0, 0, 0.65); z-index: 10; }
     .modal .modal_con { width: 900px; max-width: 96%; background: #fff; border-radius: 10px; padding: 50px 0; position: relative; }
     .modal.deletetask .modal_con, .modal.assigntask .modal_con { width: 400px; }
     .modal_div { max-height: 500px; overflow-x: hidden; padding: 0 50px; }
-    .modal_close { position: absolute; top: 0; right: 0; background: teal; color: #fff; border-radius: 0 8px; font-size: 20px; width: 30px; height: 30px; text-align: center; cursor: pointer; -webkit-transition: all .3s linear; transition: all .3s linear; }
+    .modal_close { position: absolute; top: 0; right: 0; background: teal; color: #fff; border-radius: 0 8px; font-size: 22px; width: 40px; height: 40px; text-align: center; cursor: pointer; -webkit-transition: all .3s linear; transition: all .3s linear; display: flex; justify-content: center; padding-top: 4px; z-index: 5; }
     .modal_close:hover { background: #333; }
     .modal_body h3 { margin-bottom: 15px; padding-right: 0; }
     .modal_body label { display: flex; flex-direction: column; margin-bottom: 10px; position: relative; }
@@ -324,6 +342,7 @@ footer p { display: flex; justify-content: space-between; }
     .main_right_con.col-4 .styledsubtitle > span:nth-child(4), .main_right_con.col-4 ul.styledul li > div:nth-child(4) { flex: 22% }
 
     .created small { font-size: 11px; }
+
 }
 
 @media only screen and (max-width: 1000px) {
@@ -389,8 +408,13 @@ footer p { display: flex; justify-content: space-between; }
     .main_right .nomatch, .nomatch { margin-left: 0; }
 
     .styledform { padding: 10px 20px; }
+    
+    ul.viewtask li .divgroup { flex: 100%; }
+    ul.viewtask li:nth-child(1) .divgroup:first-child, ul.viewtask li:nth-child(2) .divgroup:first-child { border-right: none; border-bottom: 1px solid #ddd; }
+    ul.viewtask li .divgroup div button { width: 100%; display: block; }
+    ul.viewtask li .divgroup div button:not(:first-child) { margin-left: 0; margin-top: 5px; }
 
-    .modal .modal_con { padding: 25px 0; }
+    .modal .modal_con { padding: 35px 0; }
     .modal_div { padding: 0 25px; max-height: 540px; }
 
     /* ck editor */

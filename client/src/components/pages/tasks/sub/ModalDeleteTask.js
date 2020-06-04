@@ -1,16 +1,21 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { deleteTask } from '../../../../store/actions/taskActions';
 
 const ModalDeleteTask = ({setModalDelete, deleteID}) => {
     const modalRef = useRef();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleDelete = e => {
         e.preventDefault();
         dispatch(deleteTask(deleteID));
         setModalDelete(false)
+        setTimeout(() => {
+            history.push('/tasks/pending')
+        }, 500)
     }
 
     useEffect(() => {

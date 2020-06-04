@@ -7,15 +7,19 @@ import MyETC from './sub/MyETC';
 import TeamTasks from './sub/TeamTasks.js';
 import AdminPendingTasks from './sub/AdminPendingTasks.js';
 import NoMatch from '../NoMatch';
+import Task from './sub/Task';
+import TaskAssigned from './sub/TaskAssigned';
 
-const TasksRight = ({user}) => {
+const TasksRight = () => {
     return (
         <Switch>
             <Route path="/tasks" exact component={MainTasks} />
             <Route path="/tasks/mypending" component={MyPendingTasks} />
             <Route path="/tasks/myetc" component={MyETC} />
             <Route path="/tasks/teamtasks" component={TeamTasks} />
-            { (user.role === 'Administrator' || user.role === 'Senior Developer') && <Route path="/tasks/pending" component={AdminPendingTasks} /> }
+            <Route path="/tasks/pending" component={AdminPendingTasks} />
+            <Route path="/tasks/:id" exact component={Task} />
+            <Route path="/tasks/assigned/:id" component={TaskAssigned} />
             <Route component={NoMatch} />
         </Switch>
     )

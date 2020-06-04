@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import ReactHtmlParser from 'react-html-parser';
 import moment from 'moment';
 
 import ModalAssignTask from './ModalAssignTask';
+import ModalModifyTask from './ModalModifyTask';
 
 import { getAssignedTask, createTask, deleteAssignedTask } from '../../../../store/actions/taskActions';
 
@@ -12,19 +14,26 @@ const TeamTasks = () => {
     const { user } = auth;
 
     const [modalAssign, setModalAssign] = useState(false);
+    const [modalModifyTask, setModalModifyTask] = useState(false);
     const [assignedTask, setAssignedTask] = useState({});
+    const [modifyTask, setModifyTask] = useState({});
     const dispatch = useDispatch();
 
     const { assignedTasks } = useSelector(state => state.task);
 
-    const handleReAssign = (id, title, instruction, name) => {
+    const handleReAssign = task => {
         setModalAssign(true)
-        setAssignedTask({ id, title, instruction, name })
+        setAssignedTask(task)
     }
 
-    const handleUnAssign = (id, title, instruction, name) => {
-        dispatch(createTask({ id, title, instruction, name }))
-        dispatch(deleteAssignedTask(id))
+    const handleModify = task => {
+        setModalModifyTask(true)
+        setModifyTask(task)
+    }
+
+    const handleUnAssign = task => {
+        dispatch(createTask(task))
+        dispatch(deleteAssignedTask(task._id))
     }
 
     useEffect(() => {
@@ -36,7 +45,7 @@ const TeamTasks = () => {
             <li key={assignedTask._id}>
                 <div className="taskdev">{assignedTask.assignedTo}</div>
                 <div className="tasktitle">
-                    <strong>{assignedTask.title}</strong>
+                    <Link to={`/tasks/assigned/${assignedTask._id}`}><strong>{assignedTask.title}</strong></Link>
                     <div className="created">
                         <small>Created by: <b>{assignedTask.createdBy}</b></small>
                         <small>{moment(assignedTask.date).format('LLLL')}</small>
@@ -46,8 +55,9 @@ const TeamTasks = () => {
                 {/* <div className="instruction" dangerouslySetInnerHTML={{ __html: assignedTask.instruction }}></div> */}
                 { (user.role === 'Administrator' || user.role === 'Senior Developer') && (
                     <div className="taskactions">
-                        <button onClick={() => handleReAssign(assignedTask._id, assignedTask.title, assignedTask.instruction, assignedTask.createdBy)}>Re-assign</button>
-                        <button onClick={() => handleUnAssign(assignedTask._id, assignedTask.title, assignedTask.instruction, assignedTask.createdBy)}>Un-assign</button>
+                        <button onClick={() => handleReAssign(assignedTask)}>Re-assign</button>
+                        <button onClick={() => handleModify(assignedTask)}>Modify</button>
+                        <button onClick={() => handleUnAssign(assignedTask)}>Un-assign</button>
                     </div>
                 )}
             </li>
@@ -59,6 +69,7 @@ const TeamTasks = () => {
     return (
         <>
             { modalAssign && <ModalAssignTask setModalAssign={setModalAssign} assignedTask={assignedTask} assign={'reassign'} /> }
+            { modalModifyTask && <ModalModifyTask setModalModifyTask={setModalModifyTask} modifyTask={modifyTask} modify={'remodify'} /> }
             <div className="main_right_con col-4">
                 <div className="styledtitle">
                     <h3>Team Tasks</h3>
