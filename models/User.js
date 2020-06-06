@@ -20,6 +20,14 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    birth: {
+        type: String,
+        required: true
+    },
+    gender: {
+        type: String,
+        required: true
+    },
     registeredDate: {
         type: Date,
         default: Date.now

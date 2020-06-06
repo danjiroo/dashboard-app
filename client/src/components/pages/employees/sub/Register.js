@@ -9,20 +9,18 @@ const Register = ({setHidden, users}) => {
     const [modalRegister, setModalRegister] = useState(false);
     const [newUser, setNewUser] = useState({
         name: '',
-        password: '123',
+        email: '',
+        password: '1234',
         role: '',
-        email: ''
+        birth: '',
+        gender: 'Male'
     });
     const [regError, setRegError] = useState(null);
     const dispatch = useDispatch();
 
     const handleFocus = () => {
-        if(window.innerWidth > 1200) {
-            setHidden(true)
-        } else if (window.innerWidth > 600 ) {
+        if(window.innerWidth < 1200 && window.innerWidth > 600 ) {
             setHidden(false)
-        } else {
-            setHidden(true)
         }
     }
     // const handleBlur = () => window.innerWidth > 1200 ? setHidden(false) : setHidden(true) // buggy ang quick links
@@ -34,8 +32,8 @@ const Register = ({setHidden, users}) => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        if(!newUser.name || !newUser.email || !newUser.role) {
-            setRegError('Please fill out required fields!')
+        if(!newUser.name || !newUser.email || !newUser.role || !newUser.birth || !newUser.gender) {
+            setRegError('Please fill out all fields!')
             return;
         }
         if(users.filter(user => user.name === newUser.name).length > 0) {
@@ -64,7 +62,7 @@ const Register = ({setHidden, users}) => {
                 <div className="styledtitle">
                     <h3>Register</h3>
                 </div>
-                <div className="styledform">
+                <div className="styledform register">
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="name">
                             <q>Name: *</q> 
@@ -73,28 +71,6 @@ const Register = ({setHidden, users}) => {
                                 name="name" 
                                 value={newUser.name} 
                                 placeholder="Name..." 
-                                onFocus={handleFocus} 
-                                onChange={handleChange} 
-                            />
-                        </label>
-                        <label htmlFor="password">
-                            <q>Default Password:</q>
-                            <input 
-                                type="text" 
-                                name="password" 
-                                placeholder="123"
-                                disabled 
-                                onFocus={handleFocus} 
-                                onChange={handleChange} 
-                            />
-                        </label>
-                        <label htmlFor="role">
-                            <q>Position: *</q>
-                            <input 
-                                type="text" 
-                                name="role" 
-                                value={newUser.role} 
-                                placeholder="Position..." 
                                 onFocus={handleFocus} 
                                 onChange={handleChange} 
                             />
@@ -109,6 +85,62 @@ const Register = ({setHidden, users}) => {
                                 onFocus={handleFocus} 
                                 onChange={handleChange} 
                             />
+                        </label>
+                        <label htmlFor="password">
+                            <q>Default Password:</q>
+                            <input 
+                                type="text" //text kay para visible pero disabled ang default password
+                                name="password" 
+                                placeholder="1234"
+                                disabled 
+                                onChange={handleChange} 
+                            />
+                        </label>
+                        <label htmlFor="role">
+                            <q>Position: *</q>
+                            <select onChange={handleChange} value={newUser.role} name="role">
+                                <option>Select Position</option>
+                                <option value="Administrator">Administrator</option>
+                                <option value="Senior Developer">Senior Developer</option>
+                                <option value="Web Developer">Web Developer</option>
+                                <option value="Trainee">Trainee</option>
+                            </select>
+                        </label>
+                        <label htmlFor="birth">
+                            <q>Date of Birth: *</q>
+                            <input 
+                                type="date" 
+                                name="birth" 
+                                value={newUser.birth} 
+                                onChange={handleChange} 
+                            />
+                        </label>
+                        <label htmlFor="gender">
+                            <q>Gender: *</q>
+                            <div className="divgender">
+                                <div 
+                                    className={ newUser.gender === 'Male' ? 'checked divradio' : 'divradio' } 
+                                >Male
+                                    <input 
+                                        type="radio" 
+                                        name="gender" 
+                                        value="Male"
+                                        onChange={handleChange} 
+                                    />
+                                    <span className="radiocheckmark"></span>
+                                </div>
+                                <div 
+                                    className={ newUser.gender === 'Female' ? 'checked divradio' : 'divradio' } 
+                                >Female
+                                <input 
+                                        type="radio" 
+                                        name="gender" 
+                                        value="Female"
+                                        onChange={handleChange} 
+                                    />
+                                    <span className="radiocheckmark"></span>
+                                </div>
+                            </div>
                         </label>
                         <button type="submit">Register</button>
                     </form>

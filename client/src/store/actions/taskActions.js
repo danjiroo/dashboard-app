@@ -76,7 +76,9 @@ export const editAssignedTask = modifyAssignedTask => (dispatch, getState) => {
             })
         }
     );
-    dispatch(getAssignedTask())
+    setTimeout(() => {
+        dispatch(getAssignedTask())
+    }, 200)
 }
 
 export const reAssignTask = newAssignedTask => (dispatch, getState) => {
@@ -87,7 +89,9 @@ export const reAssignTask = newAssignedTask => (dispatch, getState) => {
             })
         }
     );
-    dispatch(getAssignedTask())
+    setTimeout(() => {
+        dispatch(getAssignedTask())
+    }, 200)
 }
 
 export const deleteAssignedTask = id => (dispatch, getState) => {

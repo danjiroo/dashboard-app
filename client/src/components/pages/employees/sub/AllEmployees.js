@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import ModalDeleteUser from './ModalDeleteUser';
 import ModalModifyUser from './ModalModifyUser';
@@ -27,7 +28,7 @@ const AllEmployees = ({user, users}) => {
         .map((emp, index) => {
             return (
                 <li key={index}>
-                    <div>{emp.name}</div>
+                    <div><Link to={`/employees/user/${emp.name}`}>{emp.name}</Link></div>
                     <div>{emp.role}</div>
                     <div><a href={`mailto:${emp.email}`}>{emp.email}</a></div>
                     { (user.role === 'Administrator' || user.role === 'Senior Developer') && (

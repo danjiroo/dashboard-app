@@ -22,7 +22,8 @@ router.post('/', auth, (req, res) => {
         title: req.body.title,
         instruction: req.body.instruction,
         createdBy: req.body.createdBy,
-        assignedTo: req.body.assignedTo
+        assignedTo: req.body.assignedTo,
+        date: req.body.date
     });
 
     newAssignedTask.save().then(assignedTask => res.json(assignedTask));

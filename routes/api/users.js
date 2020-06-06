@@ -21,23 +21,25 @@ router.get('/', (req, res) => {
 // @desc    Register new user
 // @access  Public
 router.post('/', (req, res) => {
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role, birth, gender } = req.body;
 
     // validation
-    if(!name || !email || !password || !role) {
+    if(!name || !email || !password || !role || !gender || !birth) {
         return res.status(400).json({ msg: 'Please input all fields!' });
     }
 
     // check for existing user
     User.findOne({ email })
         .then(user => {
-            if(user) return res.status(400).json({ msg: 'User already exists.' });
+            if(user) return res.status(400).json({ msg: 'User already exists.' });// wala na ni pero wala lang sa nako gi comment
 
             const newUser = new User({
                 name,
                 email,
                 password,
-                role
+                role,
+                birth,
+                gender
             })
 
             // salt and hash pass
@@ -59,7 +61,9 @@ router.post('/', (req, res) => {
                                             id: user.id,
                                             name: user.name,
                                             email: user.email,
-                                            role: user.role
+                                            role: user.role,
+                                            birth: user.birth,
+                                            gender: user.gender
                                         }
                                     })
                                 }
@@ -76,8 +80,10 @@ router.post('/', (req, res) => {
 router.put('/:id', auth, (req, res) => {
     User.findByIdAndUpdate(req.params.id, {
         name: req.body.name, 
-        role: req.body.role, 
-        email: req.body.email
+        email: req.body.email, 
+        role: req.body.role,
+        birth: req.body.birth,
+        gender: req.body.gender
     }, function (err, user) {
         if (err) return res.status(500).send('Invalid user ID');
         res.status(200).send(user);

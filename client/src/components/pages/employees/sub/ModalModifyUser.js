@@ -35,25 +35,7 @@ const ModalModifyUser = ({selectedUser, setSelectedUser, setModalModifyUser}) =>
                                         name="name" 
                                         value={selectedUser.name} 
                                         placeholder="Name..." 
-                                        onChange={handleChange}
-                                    />
-                                </label>
-                                <label htmlFor="password">
-                                    <q>Default Password:</q>
-                                    <input 
-                                        type="password" 
-                                        name="password" 
-                                        disabled
-                                    />
-                                </label>
-                                <label htmlFor="role">
-                                    <q>Position: *</q>
-                                    <input 
-                                        type="text" 
-                                        name="role" 
-                                        value={selectedUser.role} 
-                                        placeholder="Position..." 
-                                        onChange={handleChange}
+                                        onChange={handleChange} 
                                     />
                                 </label>
                                 <label htmlFor="email">
@@ -63,8 +45,64 @@ const ModalModifyUser = ({selectedUser, setSelectedUser, setModalModifyUser}) =>
                                         name="email" 
                                         value={selectedUser.email} 
                                         placeholder="Email Address..." 
-                                        onChange={handleChange}
+                                        onChange={handleChange} 
                                     />
+                                </label>
+                                <label htmlFor="password">
+                                    <q>Default Password:</q>
+                                    <input 
+                                        type="text" //text kay para visible pero disabled ang default password
+                                        name="password" 
+                                        placeholder="1234"
+                                        disabled 
+                                        onChange={handleChange} 
+                                    />
+                                </label>
+                                <label htmlFor="role">
+                                    <q>Position: *</q>
+                                    <select onChange={handleChange} value={selectedUser.role} name="role">
+                                        <option>Select Position</option>
+                                        <option value="Administrator">Administrator</option>
+                                        <option value="Senior Developer">Senior Developer</option>
+                                        <option value="Web Developer">Web Developer</option>
+                                        <option value="Trainee">Trainee</option>
+                                    </select>
+                                </label>
+                                <label htmlFor="birth">
+                                    <q>Date of Birth: *</q>
+                                    <input 
+                                        type="date" 
+                                        name="birth" 
+                                        value={selectedUser.birth} 
+                                        onChange={handleChange} 
+                                    />
+                                </label>
+                                <label htmlFor="gender">
+                                    <q>Gender: *</q>
+                                    <div className="divgender">
+                                        <div 
+                                            className={ selectedUser.gender === 'Male' ? 'checked divradio' : 'divradio' } 
+                                        >Male
+                                            <input 
+                                                type="radio" 
+                                                name="gender" 
+                                                value="Male"
+                                                onChange={handleChange} 
+                                            />
+                                            <span className="radiocheckmark"></span>
+                                        </div>
+                                        <div 
+                                            className={ selectedUser.gender === 'Female' ? 'checked divradio' : 'divradio' } 
+                                        >Female
+                                        <input 
+                                                type="radio" 
+                                                name="gender" 
+                                                value="Female"
+                                                onChange={handleChange} 
+                                            />
+                                            <span className="radiocheckmark"></span>
+                                        </div>
+                                    </div>
                                 </label>
                                 <button type="submit">Update</button>
                             </form>

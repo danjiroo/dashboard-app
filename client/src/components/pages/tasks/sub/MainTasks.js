@@ -40,16 +40,16 @@ const MainTasks = () => {
         dispatch(getAssignedTask())
     }, [])
     
-    const fetchAssignedTasks = assignedTasks.length ? assignedTasks
+    const fetchAssignedTasks = assignedTasks.length && assignedTasks
         .filter(assignedTask => assignedTask.assignedTo === user.name)
         .map(owntask => {
             return (
                 <li key={owntask._id}>
-                    <div className="taskdev">{owntask.assignedTo}</div>
+                    <div className="taskdev"><Link to={`/employees/user/${owntask.assignedTo}`}>{owntask.assignedTo}</Link></div>
                     <div className="tasktitle">
                         <Link to={`/tasks/assigned/${owntask._id}`}><strong>{owntask.title}</strong></Link>
                         <div className="created">
-                            <small>Created by: <b>{owntask.createdBy}</b></small>
+                            <small>Created by: <Link to={`/employees/user/${owntask.createdBy}`}>{owntask.createdBy}</Link></small>
                             <small>{moment(owntask.date).format('LLLL')}</small>
                         </div>
                     </div>
@@ -65,8 +65,6 @@ const MainTasks = () => {
                 </li>
             )
         }
-    ) : (
-        <li className="stylednoresult">No task found...</li>
     )
 
     return (
@@ -84,7 +82,7 @@ const MainTasks = () => {
                     { (user.role === 'Administrator' || user.role === 'Senior Developer') && <span>Actions</span> }
                 </div>
                 <ul className="styledul">
-                    { fetchAssignedTasks }
+                    { fetchAssignedTasks.length > 0 ? fetchAssignedTasks : <li className="stylednoresult">No task found...</li> }
                 </ul>
             </div>
         </>

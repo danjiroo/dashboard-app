@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactHtmlParser from 'react-html-parser';
 import moment from 'moment';
@@ -61,11 +61,13 @@ const TaskAssigned = () => {
                             <li>
                                 <div className="divgroup">
                                     <strong>Assigned to:</strong>
-                                    { task.assignedTo ? <div>{task.assignedTo}</div> : <div style={{color: 'red'}}>Unassigned</div> }
+                                    { task.assignedTo ? (
+                                        <div><Link to={`/employees/user/${task.assignedTo}`}>{task.assignedTo}</Link></div>
+                                    ) : <div style={{color: 'red'}}>Unassigned</div> }
                                 </div>
                                 <div className="divgroup">
                                     <strong>Created By:</strong>
-                                    <div>{task.createdBy}</div>
+                                    <div><Link to={`/employees/user/${task.createdBy}`}>{task.createdBy}</Link></div>
                                 </div>
                             </li>
                             <li>

@@ -43,11 +43,11 @@ const TeamTasks = () => {
     const fetchAssignedTasks = assignedTasks.length ? (assignedTasks.map(assignedTask => {
         return (
             <li key={assignedTask._id}>
-                <div className="taskdev">{assignedTask.assignedTo}</div>
+                <div className="taskdev"><Link to={`/employees/user/${assignedTask.assignedTo}`}>{assignedTask.assignedTo}</Link></div>
                 <div className="tasktitle">
                     <Link to={`/tasks/assigned/${assignedTask._id}`}><strong>{assignedTask.title}</strong></Link>
                     <div className="created">
-                        <small>Created by: <b>{assignedTask.createdBy}</b></small>
+                        <small>Created by: <Link to={`/employees/user/${assignedTask.createdBy}`}>{assignedTask.createdBy}</Link></small>
                         <small>{moment(assignedTask.date).format('LLLL')}</small>
                     </div>
                 </div>

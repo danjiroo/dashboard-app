@@ -21,7 +21,8 @@ router.post('/', auth, (req, res) => {
     const newTask = new Task({
         title: req.body.title,
         instruction: req.body.instruction,
-        createdBy: req.body.createdBy
+        createdBy: req.body.createdBy,
+        date: req.body.date
     });
 
     newTask.save().then(task => res.json(task));
