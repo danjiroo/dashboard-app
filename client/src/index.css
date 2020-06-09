@@ -199,7 +199,7 @@ main { max-width: 100%; color: #555; margin-top: 45px; }
     /* styles inside instruction */
     .main_right_con ul.styledul ol { padding-left: 15px; }
     .main_right_con ul.styledul ul { padding-left: 25px; }
-    .main_right_con ul figure.table { overflow-x: auto; }
+    .main_right_con ul figure.table { overflow-x: auto; position: relative; z-index: 1; }
     /* .main_right_con ul figure.table > table { width: 100%; } */
 
     /* NTH-CHILD FOR WIDTHS */
@@ -431,6 +431,7 @@ footer p { display: flex; justify-content: space-between; }
     .styledform form button { margin: 30px auto 50px; }
     .divradio { margin-top: 0; }
     .modalmodify .spanerror { bottom: 20px; }
+    .ck-content .table table { width: 700px; }
     footer { font-size: 12px; }
 }
 
