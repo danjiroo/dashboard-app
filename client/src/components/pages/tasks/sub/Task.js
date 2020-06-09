@@ -59,12 +59,12 @@ const Task = () => {
                                 <div className="divgroup">
                                     <strong>Assigned to:</strong>
                                     { task.assignedTo ? (
-                                        <div><Link to={`/employees/user/${task.assignedTo}`}>{task.assignedTo}</Link></div>
+                                        <div><Link to={`/employees/user/${task.assignedTo.split(' ').join('-')}`}>{task.assignedTo}</Link></div>
                                     ) : <div style={{color: 'red'}}>Unassigned</div> }
                                 </div>
                                 <div className="divgroup">
                                     <strong>Created By:</strong>
-                                    <div><Link to={`/employees/user/${task.createdBy}`}>{task.createdBy}</Link></div>
+                                    <div><Link to={`/employees/user/${task.createdBy.split(' ').join('-')}`}>{task.createdBy}</Link></div>
                                 </div>
                             </li>
                             <li>

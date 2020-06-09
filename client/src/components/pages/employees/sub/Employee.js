@@ -20,7 +20,7 @@ const Employee = () => {
 
     return (
         <>
-            {users.filter(user => user.name === name).map(emp => {
+            {users.filter(user => user.name.split(' ').join('-') === name).map(emp => {
                 return (
                     <div key={emp._id} className="main_right_con">
                         <div className="styledtitle">
@@ -33,7 +33,6 @@ const Employee = () => {
                             <ul className="profile_info">
                                 <li>
                                     <div className="divgroup">
-                                        <strong>Name:</strong>
                                         <div>{emp.name}</div>
                                     </div>
                                     <div className="divgroup">
@@ -58,7 +57,7 @@ const Employee = () => {
                                     </div>
                                     <div className="divgroup">
                                         <strong>Birthdate:</strong>
-                                        <div>{emp.birth}</div>
+                                        <div>{moment(emp.birth).format('LL')}</div>
                                     </div>
                                 </li>
                             </ul>

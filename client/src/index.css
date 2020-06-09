@@ -64,7 +64,9 @@ nav span { background: #fff; width: 30px; height: 2px; display: block; -webkit-t
 nav span::before, nav span::after { content: ''; position: relative; display: block; top: 6px; width: 30px; height: 2px; background: #fff; }
 nav span::after { top: 11px; }
 
-nav h2 { padding: 0 20px; }
+nav h2 { padding: 0 50px 0 20px; }
+nav h2 a, nav h2 a:active, nav h2:visited { color: #fff; word-break: break-word; -webkit-transition: all .3s linear; transition: all .3s linear; }
+nav h2 a:hover { opacity: 0.8; }
 nav h5 { padding: 0 20px; font-weight: 100; font-family: 'Gafata', sans-serif; letter-spacing: 2px; border-top: 1px dotted #fff; margin-top: 5px; }
 nav ul { margin-top: 5px; }
 nav ul li a { position: relative; padding: 8px 20px; color: #fff; cursor: pointer; display: block; }
@@ -177,8 +179,6 @@ main { max-width: 100%; color: #555; margin-top: 45px; }
     .main_right_con ul.styledul > li:nth-child(2n) { background: rgba(138, 233, 233, 0.1); }
     .main_right_con ul.styledul > li:hover { background: #f1f1f1; }
 
-    .main_right_con ul.styledul.employees li { min-height: 0; }
-
     .main_right_con ul.styledul li div.tasktitle, .main_right_con ul.styledul li div.taskdev { font-family: 'Carrois Gothic SC', sans-serif; text-transform: uppercase; display: flex; flex-direction: column; justify-content: space-between; }
     .main_right_con ul.styledul li div.tasktitle strong { font-weight: bold; word-break: break-word; }
     .main_right_con ul.styledul li div.tasktitle .created { margin-top: 20px; display: flex; flex-direction: column; line-height: 16px; color: #888; }
@@ -190,6 +190,11 @@ main { max-width: 100%; color: #555; margin-top: 45px; }
     .main_right_con ul.styledul li div.taskactions button:hover { background: #0f6064; }
     .main_right_con a { color: #0d776e; -webkit-transition: all .2s linear; transition: all .2s linear; }
     .main_right_con a:hover { color: #0fc9c9 }
+
+    .main_right_con.employees ul.styledul li { min-height: 0; word-break: break-word; }
+    .main_right_con.employees ul.styledul li div.taskactions { display: flex; flex-wrap: wrap; justify-content: space-between; }
+    .main_right_con.employees ul.styledul li div.taskactions button { max-width: 48%; }
+    .main_right_con.employees ul.styledul li div.taskactions button:not(:first-child) { margin-top: 0; }
 
     /* styles inside instruction */
     .main_right_con ul.styledul ol { padding-left: 15px; }
@@ -210,6 +215,9 @@ main { max-width: 100%; color: #555; margin-top: 45px; }
     .main_right_con.col-4 .styledsubtitle > span:nth-child(2), .main_right_con.col-4 ul.styledul li > div:nth-child(2) { flex: 25% }
     .main_right_con.col-4 .styledsubtitle > span:nth-child(3), .main_right_con.col-4 ul.styledul li > div:nth-child(3) { flex: 47% }
     .main_right_con.col-4 .styledsubtitle > span:nth-child(4), .main_right_con.col-4 ul.styledul li > div:nth-child(4) { flex: 15% }
+
+    .main_right_con.col-4.employees .styledsubtitle > span:nth-child(3), .main_right_con.col-4.employees ul.styledul li > div:nth-child(3) { flex: 42% }
+    .main_right_con.col-4.employees .styledsubtitle > span:nth-child(4), .main_right_con.col-4.employees ul.styledul li > div:nth-child(4) { flex: 20% }
 
     /* LIST BODY DIVIDER */
     .main_right_con ul.styledul li > div:not(:first-child) { border-left: 1px solid rgba(0, 0, 0, 0.15); }
@@ -257,12 +265,14 @@ main { max-width: 100%; color: #555; margin-top: 45px; }
 
     /* view profile */
     .profile { padding: 40px; box-shadow: 0 2px 7px rgba(0, 123, 123, 0.3); display: flex; align-items: center; }
-    .profile_img { width: 400px; max-width: 100%; }
+    .profile_img { width: 400px; max-width: 100%; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); border-radius: 50%; overflow: hidden; }
     .profile_info { width: calc(100% - 440px); font-size: 17px; margin-left: 40px; list-style: none; }
     .profile_info li .divgroup { display: flex; padding: 20px; }
     .profile_info li .divgroup strong { width: 120px; font-family: 'Carrois Gothic SC', sans-serif; text-transform: lowercase;  }
     .profile_info li .divgroup:nth-child(2n) { background: #effbf9; }
     .profile_info li .divgroup:hover { background: #eee; }  
+    .profile_info li:first-child .divgroup:first-child:hover { background: none; }
+    .profile_info li:first-child .divgroup:first-child div { font-family: 'Carrois Gothic SC', sans-serif; text-transform: lowercase; font-size: 30px; letter-spacing: 2px; color: teal; padding: 0 0 10px; }
 
     /* modal create task */
     .modal { display: flex; justify-content: center; align-items: center; overflow-x: hidden; position: fixed; width: 100%; height: 100vh; top: 0; right: 0; left: 0; bottom: 0; background: rgba(0, 0, 0, 0.65); z-index: 10; }
@@ -289,6 +299,7 @@ main { max-width: 100%; color: #555; margin-top: 45px; }
     .spanerror { position: absolute; font-size: 13px; top: 7px; right: 0; color: red; line-height: 100%; }
     .modal.assigntask .spanerror { display: block; padding: 6px 0; position: relative; top: 0; right: auto; left: 0; }
     .modal.deleteuser .spanerror { top: -2px; }
+    .modalmodify .spanerror { bottom: 0; }
     
     /* custom select dropdown but dropdown icon in mobile is also showing */
     select { cursor: pointer; background: linear-gradient(to bottom, #E5E5E5, #F4F4F4); border: 1px solid #AAA; border-radius: 2px; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1); color: #555; margin: 0; font-size: 14px; overflow: hidden; padding-top: 2px; padding-bottom: 2px; text-overflow: ellipsis; white-space: nowrap; }
@@ -342,10 +353,13 @@ footer p { display: flex; justify-content: space-between; }
     .main_right { width: calc(100% - 230px); margin-left: 230px; }
     .main_right.hidden { width: calc(100% - 66px); margin-left: 66px; }
     .styledform form label { padding: 20px 10px; }
+    .main_right_con.col-4.employees .styledsubtitle > span:nth-child(3), .main_right_con.col-4.employees ul.styledul li > div:nth-child(3) { flex: 37%; }
+    .main_right_con.col-4.employees .styledsubtitle > span:nth-child(4), .main_right_con.col-4.employees ul.styledul li > div:nth-child(4) { flex: 25%; }
 }
 @media only screen and (max-width: 1300px) {
     .profile { flex-direction: column; justify-content: center; }
     .profile_info { width: 100%; margin-left: 0; margin-top: 40px; }
+    .profile_info li:first-child .divgroup:first-child div { margin: 0 auto; letter-spacing: 1px; text-align: center; }
 }
 @media only screen and (max-width: 1200px) {
     header { padding: 10px 20px; }
@@ -365,8 +379,17 @@ footer p { display: flex; justify-content: space-between; }
 
     .main_right_con .styledsubtitle > span:nth-child(2), .main_right_con ul.styledul li > div:nth-child(2) { flex: 51% }
     .main_right_con .styledsubtitle > span:nth-child(3), .main_right_con ul.styledul li > div:nth-child(3) { flex: 19% }
-    .main_right_con.col-4 .styledsubtitle > span:nth-child(3), .main_right_con.col-4 ul.styledul li > div:nth-child(3) { flex: 40% }
-    .main_right_con.col-4 .styledsubtitle > span:nth-child(4), .main_right_con.col-4 ul.styledul li > div:nth-child(4) { flex: 22% }
+    .main_right_con.col-4 .styledsubtitle > span:nth-child(1), .main_right_con.col-4 ul.styledul li > div:nth-child(1) { flex: 16% }
+    .main_right_con.col-4 .styledsubtitle > span:nth-child(3), .main_right_con.col-4 ul.styledul li > div:nth-child(3) { flex: 38% }
+    .main_right_con.col-4 .styledsubtitle > span:nth-child(4), .main_right_con.col-4 ul.styledul li > div:nth-child(4) { flex: 20% }
+    .main_right_con.col-4 ul.styledul li div.taskactions button { max-width: 90px; }
+
+    .main_right_con.col-4.employees { font-size: 15px; }
+    .main_right_con.col-4.employees .styledsubtitle > span:nth-child(1), .main_right_con.col-4.employees ul.styledul li > div:nth-child(1) { flex: 18%; }
+    .main_right_con.col-4.employees .styledsubtitle > span:nth-child(3), .main_right_con.col-4.employees ul.styledul li > div:nth-child(3) { flex: 35% }
+    .main_right_con.col-4.employees .styledsubtitle > span:nth-child(4), .main_right_con.col-4.employees ul.styledul li > div:nth-child(4) { flex: 21% }
+    .main_right_con.col-4.employees ul.styledul li div.taskactions button { max-width: 100%; }
+    .main_right_con.col-4.employees ul.styledul li div.taskactions button:not(:first-child) { margin-top: 5px; }
 
     .created small { font-size: 11px; }
 }
@@ -383,8 +406,13 @@ footer p { display: flex; justify-content: space-between; }
     .main_head { left: 50px; }
     .main_right.hidden { width: 100%; }
 
+    .main_right_con.col-4 .styledsubtitle > span:nth-child(1), .main_right_con.col-4 ul.styledul li > div:nth-child(1) { flex: 12% }
     .main_right_con.col-4 .styledsubtitle > span:nth-child(3), .main_right_con.col-4 ul.styledul li > div:nth-child(3) { flex: 45% }
     .main_right_con.col-4 .styledsubtitle > span:nth-child(4), .main_right_con.col-4 ul.styledul li > div:nth-child(4) { flex: 17% }
+
+    .main_right_con.col-4.employees .styledsubtitle > span:nth-child(3), .main_right_con.col-4.employees ul.styledul li > div:nth-child(3) { flex: 36% }
+    .main_right_con.col-4.employees .styledsubtitle > span:nth-child(4), .main_right_con.col-4.employees ul.styledul li > div:nth-child(4) { flex: 17% }
+    .main_right_con ul.styledul li div.taskactions button { max-width: 100px; }
 
     .profile_img { width: 350px; }
 }
@@ -395,11 +423,14 @@ footer p { display: flex; justify-content: space-between; }
     .main_right_con ul.styledul li > div:not(:first-child) { padding-top: 15px !important; border-left: none !important; border-top: 1px solid rgba(0, 0, 0, 0.1) }
     .main_right_con ul.styledul li > div:not(:last-child) { padding-bottom: 15px !important; }
     .main_right_con ul.styledul li div.taskactions button:not(:first-child) { margin-top: 0; margin-left: 10px; }
-    .main_right_con ul.styledul li div.taskactions { display: flex; }
+    .main_right_con ul.styledul li div.taskactions { display: flex; justify-content: flex-start; }
+    .main_right_con.col-4.employees ul.styledul li div.taskactions button { max-width: 90px; margin-top: 6px !important }
+    .main_right_con.col-4.employees ul.styledul li div.taskactions { justify-content: flex-start; }
     .main_right_con .styledsubtitle { display: none; }
     .styledform form label { width: 100%; padding: 10px 0; }
     .styledform form button { margin: 30px auto 50px; }
     .divradio { margin-top: 0; }
+    .modalmodify .spanerror { bottom: 20px; }
     footer { font-size: 12px; }
 }
 
@@ -434,8 +465,9 @@ footer p { display: flex; justify-content: space-between; }
     .main_right.hidden { margin-right: 0; margin-left: 0; }
     .main_right h3 { padding-right: 0; }
     .main_right_con ul.styledul li div.taskactions { flex-wrap: wrap }
-    .main_right_con ul.styledul li div.taskactions button { max-width: 100% ; }
-    .main_right_con ul.styledul li div.taskactions button:not(:first-child) { margin-top: 5px; margin-left: 0; }
+    .main_right_con ul.styledul li div.taskactions button { max-width: 100% !important; }
+    .main_right_con ul.styledul li div.taskactions button:not(:first-child) { margin-top: 6px; margin-left: 0 !important; }
+    .main_right_con.col-4.employees ul.styledul li div.taskactions button { max-width: 38% }
 
     .main_right .nomatch, .nomatch { margin-left: 0; }
 

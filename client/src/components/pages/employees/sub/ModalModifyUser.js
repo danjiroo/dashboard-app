@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { loadUser } from '../../../../store/actions/authActions';
 import { modifyUser } from '../../../../store/actions/allUsersActions';
 
-const ModalModifyUser = ({selectedUser, setSelectedUser, setModalModifyUser}) => {
+const ModalModifyUser = ({users, selectedUser, setSelectedUser, setModalModifyUser}) => {
+    const [regError, setRegError] = useState(null);
     const dispatch = useDispatch();
     
     const handleChange = e => {
-        e.preventDefault()
+        e.preventDefault();
+        setRegError(null);
         setSelectedUser({...selectedUser, [e.target.name]: e.target.value})
     }
 
     const handleSubmit = e => {
         e.preventDefault();
+        if(!selectedUser.name || !selectedUser.email || !selectedUser.role || !selectedUser.birth || !selectedUser.gender) {
+            setRegError('Please fill out all fields!')
+            return;
+        }
         dispatch(modifyUser(selectedUser));
+        dispatch(loadUser())
         setModalModifyUser(false)
     }
 
@@ -25,8 +33,9 @@ const ModalModifyUser = ({selectedUser, setSelectedUser, setModalModifyUser}) =>
                         <span>x</span>
                     </div>
                     <div className="modal_body">
-                        <div className="styledform">
+                        <div className="styledform modalmodify">
                             <h3>Modify User</h3>
+                            { regError ? <span className="spanerror">{ regError }</span> : null }
                             <form onSubmit={handleSubmit}>
                                 <label htmlFor="name">
                                     <q>Name: *</q> 
@@ -53,7 +62,7 @@ const ModalModifyUser = ({selectedUser, setSelectedUser, setModalModifyUser}) =>
                                     <input 
                                         type="text" //text kay para visible pero disabled ang default password
                                         name="password" 
-                                        placeholder="1234"
+                                        placeholder="code"
                                         disabled 
                                         onChange={handleChange} 
                                     />

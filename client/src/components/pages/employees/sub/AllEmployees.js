@@ -26,9 +26,10 @@ const AllEmployees = ({user, users}) => {
     const fetchAllUsers = users.length ? users
         .sort((a, b) => (a.name > b.name) ? 1 : -1)
         .map((emp, index) => {
+            // let firstName = emp.name.split(' ').length > 1 ? emp.name.split(' ')[0] : emp.name;
             return (
                 <li key={index}>
-                    <div><Link to={`/employees/user/${emp.name}`}>{emp.name}</Link></div>
+                    <div><Link to={`/employees/user/${emp.name && emp.name.split(' ').join('-')}`} title={emp.name}>{emp.name.split(' ').slice(0, 1).join(' ')}</Link></div>
                     <div>{emp.role}</div>
                     <div><a href={`mailto:${emp.email}`}>{emp.email}</a></div>
                     { (user.role === 'Administrator' || user.role === 'Senior Developer') && (
@@ -50,18 +51,18 @@ const AllEmployees = ({user, users}) => {
     return (
         <>
             { modalDeleteUser && <ModalDeleteUser setModalDeleteUser={setModalDeleteUser} selectedUser={selectedUser} user={user} /> }
-            { modalModifyUser && <ModalModifyUser setModalModifyUser={setModalModifyUser} setSelectedUser={setSelectedUser} selectedUser={selectedUser} /> }
-            <div className="main_right_con col-4">
+            { modalModifyUser && <ModalModifyUser users={users} setModalModifyUser={setModalModifyUser} setSelectedUser={setSelectedUser} selectedUser={selectedUser} /> }
+            <div className="main_right_con col-4 employees">
                 <div className="styledtitle">
                     <h3>All Employees</h3>
                 </div>
                 <div className="styledsubtitle">
-                    <span>Developer</span>
+                    <span>Dev</span>
                     <span>Position</span>
                     <span>Email Address</span>
                     { (user.role === 'Administrator' || user.role === 'Senior Developer') && <span>Actions</span> }
                 </div>
-                <ul className="styledul employees"> { fetchAllUsers } </ul>
+                <ul className="styledul"> { fetchAllUsers } </ul>
             </div>
         </>
     )

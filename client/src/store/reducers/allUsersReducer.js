@@ -15,7 +15,8 @@ const allUsersReducer = (state = initState, action) => {
         case 'CREATE_USER': {
             return {
                 ...state,
-                users: [ action.payload, ...state.users ]
+                ...action.payload,
+                loading: false
             }
         }
         case 'MODIFY_USER': {

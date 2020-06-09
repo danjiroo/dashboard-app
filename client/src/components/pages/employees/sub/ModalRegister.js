@@ -15,12 +15,11 @@ const ModalRegister = ({newUser, setModalRegister, setNewUser}) => {
         setNewUser({
             name: '',
             email: '',
-            password: '1234',
+            password: 'code',
             role: '',
             birth: '',
             gender: 'Male'
         })
-        setChecked({male: true, female: false});
     }
 
     useEffect(() => {

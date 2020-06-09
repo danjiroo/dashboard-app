@@ -10,7 +10,7 @@ const Register = ({setHidden, users}) => {
     const [newUser, setNewUser] = useState({
         name: '',
         email: '',
-        password: '1234',
+        password: 'code',
         role: '',
         birth: '',
         gender: 'Male'
@@ -30,6 +30,17 @@ const Register = ({setHidden, users}) => {
         setNewUser({...newUser, [e.target.name]: e.target.value})
     }
 
+    const getAge = birth => {
+        var today = new Date();
+        var birthDate = new Date(birth);
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var month = today.getMonth() - birthDate.getMonth();
+        if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
     const handleSubmit = e => {
         e.preventDefault();
         if(!newUser.name || !newUser.email || !newUser.role || !newUser.birth || !newUser.gender) {
@@ -42,6 +53,10 @@ const Register = ({setHidden, users}) => {
         }
         if(users.filter(user => user.email === newUser.email).length > 0) {
             setRegError('Email already used!')
+            return;
+        }
+        if(getAge(newUser.birth) < 18) {
+            setRegError(`${getAge(newUser.birth)}? Must be 18 years old and above!`)
             return;
         }
         setModalRegister(true)
@@ -91,7 +106,7 @@ const Register = ({setHidden, users}) => {
                             <input 
                                 type="text" //text kay para visible pero disabled ang default password
                                 name="password" 
-                                placeholder="1234"
+                                placeholder="code"
                                 disabled 
                                 onChange={handleChange} 
                             />

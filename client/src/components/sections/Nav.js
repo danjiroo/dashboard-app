@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 const Nav = ({hidden, setHidden}) => {
     const auth = useSelector(state => state.auth);
@@ -32,13 +32,13 @@ const Nav = ({hidden, setHidden}) => {
           document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [bodyRef]);
-    
+
     return (
         <nav ref={bodyRef} className={ hidden ? 'hidden' : null }>
             <div className="toggle" onClick={() => setHidden(!hidden)}>
                 <span></span>
             </div>
-            <h2>{user.name}</h2>
+            <h2><Link to={`/employees/user/${user.name && user.name.split(' ').join('-')}`}>{user.name && user.name.split(' ').slice(0, 1).join(' ')}</Link></h2>
             <h5>{user.role}</h5>
             <ul>
                 <li><NavLink exact to="/">Home</NavLink></li>

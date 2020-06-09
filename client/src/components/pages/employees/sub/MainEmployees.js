@@ -8,7 +8,7 @@ const MainEmployees = ({user}) => {
                 <div className="styledtitle">
                     <h3>My Profile</h3>
                 </div>
-                    <p className="underconst">Hi <Link to={`/employees/user/${user.name}`}><strong>{user.name}</strong></Link>! This page is still in progress, please check back next time...</p>
+                    <p className="underconst">Hi <Link to={`/employees/user/${user._id}`}><strong>{user.name}</strong></Link>! This page is still in progress, please check back next time...</p>
             </div>
         </>
     )

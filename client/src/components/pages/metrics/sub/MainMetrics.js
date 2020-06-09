@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const MainMetrics = () => {
     return (
@@ -7,7 +8,10 @@ const MainMetrics = () => {
                 <div className="styledtitle">
                     <h3>MainMetrics</h3>
                 </div>
-                <p className="underconst">This page is still in progress....</p>
+                <div className="underconst">
+                    <p>This page is still in progress....</p>
+                    <p>Please check <Link to="/employees">Employees</Link> and <Link to="/tasks">Tasks</Link> pages.</p>
+                </div>
             </div>
         </>
     )

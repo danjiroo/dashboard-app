@@ -4,7 +4,7 @@ import {useHistory} from 'react-router-dom'
 
 import { logout } from '../../store/actions/authActions';
 
-const Header = (props) => {
+const Header = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
