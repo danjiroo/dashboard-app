@@ -18,9 +18,9 @@ const TasksRight = () => {
             <Route path="/tasks/myetc" component={MyETC} />
             <Route path="/tasks/teamtasks" component={TeamTasks} />
             <Route path="/tasks/pending" component={AdminPendingTasks} />
-            <Route path="/tasks/:id" exact component={Task} />
-            <Route path="/tasks/assigned/:id" component={TaskAssigned} />
-            <Route component={NoMatch} />
+            <Route path="/tasks/id/:id" exact component={Task} />
+            <Route path="/tasks/assigned/:id" exact component={TaskAssigned} />
+            <Route exact component={NoMatch} />
         </Switch>
     )
 }

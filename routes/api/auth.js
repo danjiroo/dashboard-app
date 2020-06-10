@@ -39,7 +39,8 @@ router.post('/', (req, res) => {
                                     _id: user._id,
                                     name: user.name,
                                     email: user.email,
-                                    role: user.role
+                                    role: user.role,
+                                    empId: user.empId
                                 }
                             })
                         }

@@ -77,11 +77,11 @@ const ModalModifyTask = ({setModalModifyTask, modifyTask, modify}) => {
                                             toolbar: {
                                                 items: [
                                                     // 'heading', '|',
-                                                    'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', 'insertTable', '|',
-                                                    'alignment', 'link', 'blockQuote', '|',
+                                                    'bold', 'italic', 'underline', 'strikethrough', 'insertTable', 'undo', 'redo', '|',
+                                                    'alignment', 'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', '|',
+                                                    'link', 'blockQuote', '|',
                                                     'bulletedList', 'numberedList', '|',
-                                                    'outdent', 'indent', '|', 
-                                                    'undo', 'redo'
+                                                    'outdent', 'indent'
                                                 ]
                                             },
                                             fontFamily: {

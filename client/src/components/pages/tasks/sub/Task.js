@@ -48,7 +48,7 @@ const Task = () => {
             { modalAssign && <ModalAssignTask setModalAssign={setModalAssign} assignedTask={assignedTask} assign={'assign'} /> }
             { modalModifyTask && <ModalModifyTask setModalModifyTask={setModalModifyTask} modifyTask={modifyTask} /> }
             { modalDelete && <ModalDeleteTask setModalDelete={setModalDelete} deleteID={deleteID} /> }
-            {tasks.filter(taskkk => taskkk._id === id).map(task => {
+            {tasks.filter(taskkk => taskkk.taskId == id).map(task => {
                 return (
                     <div key={task._id} className="main_right_con">
                         <div className="styledtitle">
@@ -58,13 +58,11 @@ const Task = () => {
                             <li>
                                 <div className="divgroup">
                                     <strong>Assigned to:</strong>
-                                    { task.assignedTo ? (
-                                        <div><Link to={`/employees/user/${task.assignedTo.split(' ').join('-')}`}>{task.assignedTo}</Link></div>
-                                    ) : <div style={{color: 'red'}}>Unassigned</div> }
+                                    <div style={{color: 'red'}}>Unassigned</div>
                                 </div>
                                 <div className="divgroup">
                                     <strong>Created By:</strong>
-                                    <div><Link to={`/employees/user/${task.createdBy.split(' ').join('-')}`}>{task.createdBy}</Link></div>
+                                    <div><Link to={`/employees/user/${task.createdByEmpId}`}>{task.createdBy}</Link></div>
                                 </div>
                             </li>
                             <li>

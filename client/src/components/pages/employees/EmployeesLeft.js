@@ -8,7 +8,7 @@ const EmployeesLeft = ({hidden, setHidden, user}) => {
                 <ul className="main_own_links">
                     <li><a onClick={() => setHidden(!hidden)} className="quicklinks">Quick Links</a></li>
                     <li><NavLink to="/employees" exact>All Employees</NavLink></li>
-                    <li><NavLink to={`/employees/user/${user.name && user.name.split(' ').join('-')}`}>My Profile</NavLink></li>
+                    <li><NavLink to={`/employees/user/${user.empId}`}>My Profile</NavLink></li>
                     <li><NavLink to="/employees/myteam">My Team</NavLink></li>
                 </ul>
             </div>

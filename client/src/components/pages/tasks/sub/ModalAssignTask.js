@@ -28,13 +28,14 @@ const ModalAssignTask = ({setModalAssign, assignedTask, assign}) => {
             setError(true);
             return          
         }
-        let reAssignedTo = { ...assignedTask, assignedTo: developer }
+        let assignedDev = users.users.filter(user => user.empId == developer).map(name => name.name)
+        let reAssignedTo = { ...assignedTask, assignedToEmpId: developer, assignedTo: assignedDev[0].split(' ').slice(0, 1).join(' ') }
         if (assign === 'reassign') {
             dispatch(reAssignTask(reAssignedTo))
         } else {
             dispatch(assignTask(reAssignedTo))
             setTimeout(() => {
-                history.push('/tasks/pending')
+                history.push('/tasks/teamtasks')
             }, 500)
         }
         setDeveloper('')
@@ -56,7 +57,7 @@ const ModalAssignTask = ({setModalAssign, assignedTask, assign}) => {
                             <select onChange={handleSelectDev} value={developer}>
                                 <option>Select a Developer</option>
                                 { users.users.length && users.users.map(user => {
-                                    return <option key={user._id} value={user.name}>{user.name}</option>
+                                    return <option key={user._id} value={user.empId}>{user.name}</option>
                                 }) }
                             </select>
                             <button type="submit">Re-assign</button>

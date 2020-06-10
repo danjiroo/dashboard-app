@@ -38,7 +38,7 @@ const Nav = ({hidden, setHidden}) => {
             <div className="toggle" onClick={() => setHidden(!hidden)}>
                 <span></span>
             </div>
-            <h2><Link to={`/employees/user/${user.name && user.name.split(' ').join('-')}`}>{user.name && user.name.split(' ').slice(0, 1).join(' ')}</Link></h2>
+            <h2><Link to={`/employees/user/${user.empId}`}>{user.name && user.name.split(' ').slice(0, 1).join(' ')}</Link></h2>
             <h5>{user.role}</h5>
             <ul>
                 <li><NavLink exact to="/">Home</NavLink></li>

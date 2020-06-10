@@ -9,7 +9,7 @@ import femaleImg from '../../../../assets/images/female.jpg';
 import { getAllUsers } from '../../../../store/actions/allUsersActions';
 
 const Employee = () => {
-    const { name } = useParams();
+    const { empId } = useParams();
     const { users } = useSelector(state => state.user);
     const dispatch = useDispatch();
 
@@ -20,7 +20,7 @@ const Employee = () => {
 
     return (
         <>
-            {users.filter(user => user.name.split(' ').join('-') === name).map(emp => {
+            {users.filter(user => user.empId == empId).map(emp => {
                 return (
                     <div key={emp._id} className="main_right_con">
                         <div className="styledtitle">

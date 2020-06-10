@@ -15,13 +15,25 @@ const AssignedTaskSchema = new Schema({
         type: String,
         required: true
     },
+    createdByEmpId: {
+        type: Number,
+        required: true
+    },
     assignedTo: {
         type: String,
+        required: true
+    },
+    assignedToEmpId: {
+        type: Number,
         required: true
     },
     date: {
         type: Date,
         default: Date.now
+    },
+    taskId: {
+        type: Number,
+        required: true
     }
 });
 

@@ -29,7 +29,7 @@ const AllEmployees = ({user, users}) => {
             // let firstName = emp.name.split(' ').length > 1 ? emp.name.split(' ')[0] : emp.name;
             return (
                 <li key={index}>
-                    <div><Link to={`/employees/user/${emp.name && emp.name.split(' ').join('-')}`} title={emp.name}>{emp.name.split(' ').slice(0, 1).join(' ')}</Link></div>
+                    <div><Link to={`/employees/user/${emp.empId}`} title={emp.name}>{emp.name.split(' ').slice(0, 1).join(' ')}</Link></div>
                     <div>{emp.role}</div>
                     <div><a href={`mailto:${emp.email}`}>{emp.email}</a></div>
                     { (user.role === 'Administrator' || user.role === 'Senior Developer') && (

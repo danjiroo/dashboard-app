@@ -19,7 +19,7 @@ const EmployeesRight = ({user, setHidden}) => {
             { (user.role === 'Administrator' || user.role === 'Senior Developer') 
                 && <Route path="/employees/register" render={props => <Register setHidden={setHidden} users={users} />} /> 
             }
-            <Route path="/employees/user/:name" component={Employee} />
+            <Route path="/employees/user/:empId" component={Employee} />
             <Route component={NoMatch} />
         </Switch>
     )

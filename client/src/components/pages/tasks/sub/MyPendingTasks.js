@@ -41,15 +41,15 @@ const MyPendingTasks = () => {
     }, [])
     
     const fetchAssignedTasks = assignedTasks.length && assignedTasks
-        .filter(assignedTask => assignedTask.assignedTo === user.name)
+        .filter(assignedTask => assignedTask.assignedToEmpId === user.empId)
         .map(owntask => {
             return (
                 <li key={owntask._id}>
-                    <div className="taskdev"><Link to={`/employees/user/${owntask.assignedTo.split(' ').join('-')}`}>{owntask.assignedTo.split(' ').slice(0, 1).join(' ')}</Link></div>
+                    <div className="taskdev"><Link to={`/employees/user/${owntask.assignedToEmpId}`}>{owntask.assignedTo}</Link></div>
                     <div className="tasktitle">
-                        <Link to={`/tasks/assigned/${owntask._id}`}><strong>{owntask.title}</strong></Link>
+                        <Link to={`/tasks/assigned/${owntask.taskId}`}><strong>{owntask.title}</strong></Link>
                         <div className="created">
-                            <small>Created by: <Link to={`/employees/user/${owntask.createdBy.split(' ').join('-')}`}>{owntask.createdBy.split(' ').slice(0, 1).join(' ')}</Link></small>
+                            <small>Created by: <Link to={`/employees/user/${owntask.createdByEmpId}`}>{owntask.createdBy}</Link></small>
                             <small>{moment(owntask.date).format('LLLL')}</small>
                         </div>
                     </div>

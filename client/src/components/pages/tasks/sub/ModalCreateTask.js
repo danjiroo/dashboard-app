@@ -10,7 +10,7 @@ import { createTask } from '../../../../store/actions/taskActions';
 
 const ModalCreateTask = ({setModalCreate}) => {
     const auth = useSelector(state => state.auth);
-    const { name } = auth.user;
+    const { name, empId } = auth.user;
     const [title, setTitle] = useState('');
     const [instruction, setInstruction] = useState('');
     const [error, setError] = useState(false);
@@ -32,7 +32,7 @@ const ModalCreateTask = ({setModalCreate}) => {
             setError(true);
             return          
         }
-        let newtask = { title, instruction, createdBy: name }
+        let newtask = { title, instruction, createdBy: name.split(' ').slice(0, 1).join(' '), createdByEmpId: empId }
         dispatch(createTask(newtask));
         setTitle('');
         setInstruction('');
@@ -75,11 +75,11 @@ const ModalCreateTask = ({setModalCreate}) => {
                                             toolbar: {
                                                 items: [
                                                     // 'heading', '|',
-                                                    'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', 'insertTable', '|',
-                                                    'alignment', 'link', 'blockQuote', '|',
+                                                    'bold', 'italic', 'underline', 'strikethrough', 'insertTable', 'undo', 'redo', '|',
+                                                    'alignment', 'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor', '|',
+                                                    'link', 'blockQuote', '|',
                                                     'bulletedList', 'numberedList', '|',
-                                                    'outdent', 'indent', '|', 
-                                                    'undo', 'redo'
+                                                    'outdent', 'indent'
                                                 ]
                                             },
                                             fontFamily: {

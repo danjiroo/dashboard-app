@@ -22,8 +22,11 @@ router.post('/', auth, (req, res) => {
         title: req.body.title,
         instruction: req.body.instruction,
         createdBy: req.body.createdBy,
+        createdByEmpId: req.body.createdByEmpId,
         assignedTo: req.body.assignedTo,
-        date: req.body.date
+        assignedToEmpId: req.body.assignedToEmpId,
+        date: req.body.date,
+        taskId: req.body.taskId
     });
 
     newAssignedTask.save().then(assignedTask => res.json(assignedTask));
@@ -43,7 +46,7 @@ router.put('/:id', auth, (req, res) => {
 // @desc    Re-Assign a Task to
 // @access  Private
 router.put('/dev/:id', auth, (req, res) => {
-    AssignedTask.findByIdAndUpdate(req.params.id, {assignedTo: req.body.assignedTo}, function (err, task) {
+    AssignedTask.findByIdAndUpdate(req.params.id, {assignedTo: req.body.assignedTo, assignedToEmpId: req.body.assignedToEmpId}, function (err, task) {
         if (err) return res.status(500).send('Invalid task ID');
         res.status(200).send(task);
     });

@@ -40,7 +40,8 @@ const taskReducer = (state = initState, action) => {
         case 'GET_ASSIGNED_TASK': {
             return {
                 ...state,
-                assignedTasks: action.payload.sort((a, b) => (a.assignedTo > b.assignedTo) ? 1 : -1),
+                // assignedTasks: action.payload.sort((a, b) => (a.assignedTo > b.assignedTo) ? 1 : -1),
+                assignedTasks: action.payload,
                 loading: false
             }
         }
@@ -67,8 +68,6 @@ const taskReducer = (state = initState, action) => {
                 ...state,
                 assignedTasks: state.assignedTasks.filter(task => {
                     if (task._id === action.payload._id) {
-                        console.log(task._id, action.payload._id)
-                        console.log(task.assignedTo, action.payload.assignedTo)
                         task.assignedTo = action.payload.assignedTo
                     }
                     return { ...state.assignedTasks, task }

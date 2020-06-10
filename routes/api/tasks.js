@@ -22,6 +22,7 @@ router.post('/', auth, (req, res) => {
         title: req.body.title,
         instruction: req.body.instruction,
         createdBy: req.body.createdBy,
+        createdByEmpId: req.body.createdByEmpId,
         date: req.body.date
     });
 

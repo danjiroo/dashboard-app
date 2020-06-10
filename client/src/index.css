@@ -429,6 +429,7 @@ footer p { display: flex; justify-content: space-between; }
     .main_right_con .styledsubtitle { display: none; }
     .styledform form label { width: 100%; padding: 10px 0; }
     .styledform form button { margin: 30px auto 50px; }
+    .styledform form label input { width: 100%; }
     .divradio { margin-top: 0; }
     .modalmodify .spanerror { bottom: 20px; }
     .ck-content .table table { width: 700px; }
@@ -490,7 +491,9 @@ footer p { display: flex; justify-content: space-between; }
     /* ck editor */
     .ck.ck-toolbar-dropdown .ck.ck-toolbar .ck.ck-toolbar__items, .ck.ck-toolbar.ck-toolbar_grouping > .ck-toolbar__items { flex-wrap: wrap; }
     .ck.ck-toolbar-dropdown .ck-toolbar { width: 100%; }
-    .ck.ck-toolbar .ck.ck-toolbar__separator { display: none; }
+    .ck.ck-toolbar .ck.ck-toolbar__separator:not(:nth-child(8)) { display: none; }
+    .ck.ck-toolbar .ck.ck-toolbar__separator:nth-child(8) { width: 100%; }
+    .ck.ck-button, a.ck.ck-button { min-width: auto; }
 
     footer { padding: 15px 10px 15px 68px; letter-spacing: 1px; font-size: 11px; }
     footer p { flex-direction: column; align-items: flex-start; line-height: 20px; }

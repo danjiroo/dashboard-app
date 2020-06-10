@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Schema = mongoose.Schema;
 
 // create schema
@@ -33,5 +34,7 @@ const UserSchema = new Schema({
         default: Date.now
     }
 });
+
+UserSchema.plugin(AutoIncrement, {inc_field: 'empId'});
 
 module.exports = User = mongoose.model('user', UserSchema);

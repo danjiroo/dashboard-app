@@ -44,9 +44,9 @@ const AdminPendingTasks = () => {
         return (
             <li key={task._id}>
                 <div className="tasktitle">
-                    <Link to={`/tasks/${task._id}`}><strong>{task.title}</strong></Link>
+                    <Link to={`/tasks/id/${task.taskId}`}><strong>{task.title}</strong></Link>
                     <div className="created">
-                        <small>Created by: <Link to={`/employees/user/${task.createdBy.split(' ').join('-')}`}>{task.createdBy.split(' ').slice(0, 1).join(' ')}</Link></small>
+                        <small>Created by: <Link to={`/employees/user/${task.createdByEmpId}`}>{task.createdBy.split(' ').slice(0, 1).join(' ')}</Link></small>
                         <small>{moment(task.date).format('LLLL')}</small>
                     </div>
                 </div>
