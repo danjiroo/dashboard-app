@@ -28,17 +28,5 @@ app.use('/auth', require('./routes/api/auth'));
 app.use('/tasks', require('./routes/api/tasks'));
 app.use('/assignedTasks', require('./routes/api/assignedTasks'));
 
-if(process.env.NODE_ENV === 'production') {
-    // set static folder
-    // app.use(express.static('client/dist'));
-    app.use(express.static('client/dist', {
-        maxAge: '1y' // caching!
-    }));
-
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
-    });
-}
-
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening to port: ${port}`));
