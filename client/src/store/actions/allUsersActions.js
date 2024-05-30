@@ -3,11 +3,9 @@ import axios from 'axios';
 import { tokenConfig } from './authActions';
 import { returnError } from './errorActions';
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
-
 export const getAllUsers = () => dispatch => {
     dispatch(setLoadingUsers())
-    axios.get(`${apiBaseUrl}/api/users`)
+    axios.get(`/api/users`)
         .then(res => 
             dispatch({
                 type: 'GET_ALL_USERS',
@@ -18,7 +16,7 @@ export const getAllUsers = () => dispatch => {
 }
 
 export const registerUser = newUser => (dispatch, getState) => {
-    axios.post(`${apiBaseUrl}/api/users`, newUser, tokenConfig(getState))
+    axios.post(`/api/users`, newUser, tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: 'CREATE_USER',
@@ -32,7 +30,7 @@ export const registerUser = newUser => (dispatch, getState) => {
 }
 
 export const modifyUser = selectedUserToModify => (dispatch, getState) => {
-    axios.put(`${apiBaseUrl}/api/users/${selectedUserToModify._id}`, selectedUserToModify, tokenConfig(getState)).then(res => {
+    axios.put(`/api/users/${selectedUserToModify._id}`, selectedUserToModify, tokenConfig(getState)).then(res => {
             dispatch({
                 type: 'MODIFY_USER',
                 payload: res.data
@@ -43,7 +41,7 @@ export const modifyUser = selectedUserToModify => (dispatch, getState) => {
 }
 
 export const deleteUser = id => (dispatch, getState) => {
-    axios.delete(`${apiBaseUrl}/api/users/${id}`, tokenConfig(getState)).then(res => {
+    axios.delete(`/api/users/${id}`, tokenConfig(getState)).then(res => {
             dispatch({
                 type: 'DELETE_USER',
                 payload: id

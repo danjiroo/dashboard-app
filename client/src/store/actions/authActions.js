@@ -2,15 +2,13 @@
 import axios from 'axios';
 import { returnError } from './errorActions';
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
-
 // check token first then load user
 export const loadUser = () => (dispatch, getState) => {
 
     // user loads
     dispatch({ type: 'USER_LOADING' });
 
-    axios.get(`${apiBaseUrl}/api/auth/user`, tokenConfig(getState))
+    axios.get(`/api/auth/user`, tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: 'USER_LOADED',
@@ -32,7 +30,7 @@ export const login = (email, password) => dispatch => {
 
     const body = JSON.stringify({email, password});
 
-    axios.post(`${apiBaseUrl}/api/auth`, body, config)
+    axios.post(`/api/auth`, body, config)
         .then(res => {
             console.log('@login_success....', res)
             return dispatch({
@@ -84,7 +82,7 @@ export const tokenConfig = getState => {
 
 //     const body = JSON.stringify({name, email, password, role});
 
-//     axios.post(`${apiBaseUrl}/api/users`, body, config)
+//     axios.post(`/api/users`, body, config)
 //         .then(res => dispatch({
 //             type: 'REGISTER_SUCCESS',
 //             payload: res.data
