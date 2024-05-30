@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config(); 
 
-console.log('@process.env', { x: process.env })
+console.log('@logs debug,', { xxx: process.env } )
 
 export default defineConfig(() => {
   return {
@@ -15,8 +15,7 @@ export default defineConfig(() => {
         '/api': {
           // not working on prod/vercel, will debug later
           // target: process.env.VITE_API_BASE_URL,
-          // target: 'http://localhost:5000',
-          target: 'https://dashboard-app-server.vercel.app',
+          target: prcoess.env.VITE_VERCEL_ENV === 'production' ? 'https://dashboard-app-server.vercel.app' : 'http://localhost:5000',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },
