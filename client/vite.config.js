@@ -15,7 +15,8 @@ export default defineConfig(() => {
         '/api': {
           // not working on prod/vercel, will debug later
           // target: process.env.VITE_API_BASE_URL,
-          target: import.meta.env.NODE_ENV === 'production' ? 'https://dashboard-app-server.vercel.app' : 'http://localhost:5000',
+          // target: 'http://localhost:5000',
+          target: 'https://dashboard-app-server.vercel.app',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },
