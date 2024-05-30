@@ -2,9 +2,7 @@
 import axios from 'axios';
 import { returnError } from './errorActions';
 
-const apiBaseUrl = import.meta.env.mode === 'development' ? '' : import.meta.env.VITE_API_BASE_URL
-console.log('import.meta.env.VITE_API_BASE_URL', import.meta.env)
-
+const apiBaseUrl = import.meta.env.MODE === 'development' ? '' : import.meta.env.VITE_API_BASE_URL
 
 // check token first then load user
 export const loadUser = () => (dispatch, getState) => {

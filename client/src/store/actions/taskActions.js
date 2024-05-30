@@ -3,7 +3,7 @@ import axios from 'axios';
 import { tokenConfig } from './authActions';
 import { returnError } from './errorActions';
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
+const apiBaseUrl = import.meta.env.MODE === 'development' ? '' : import.meta.env.VITE_API_BASE_URL
 
 export const getTask = () => dispatch => {
     dispatch(setLoadingTask())
