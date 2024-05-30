@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
@@ -8,10 +9,15 @@ export default defineConfig({
     proxy: {
       // this generate: '/api/your-endpoint' => '/your-endpoint'
       '/api': {
-        target: import.meta.env.VITE_API_BASE_URL,
+        target: process.env.VITE_API_BASE_URL,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
     }
   }
 })
+
+
+
+
+
