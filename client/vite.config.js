@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config(); 
 
-console.log('@logs debug,', { viteenv: import.meta.env, processEnv: process.env})
+console.log('@process.env', { x: process.env })
 
 export default defineConfig(() => {
   return {
