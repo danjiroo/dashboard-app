@@ -12,7 +12,6 @@ const User = require('../../models/User');
 // @desc    Authenticate user / Login
 // @access  Public
 router.post('/', (req, res) => {
-    return res.status(400).json({ msg: 'xxxx test' });
     const { email, password } = req.body;
 
     // validation
