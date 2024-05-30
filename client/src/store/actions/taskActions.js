@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import { tokenConfig } from './authActions';
 import { returnError } from './errorActions';

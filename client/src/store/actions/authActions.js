@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from 'axios';
 import { returnError } from './errorActions';
 
@@ -30,10 +31,13 @@ export const login = (email, password) => dispatch => {
     const body = JSON.stringify({email, password});
 
     axios.post('/api/auth', body, config)
-        .then(res => dispatch({
-            type: 'LOGIN_SUCCESS',
-            payload: res.data
-        }))
+        .then(res => {
+            console.log('@login_success....', res)
+            return dispatch({
+                type: 'LOGIN_SUCCESS',
+                payload: res.data
+            })
+        })
         .then(res => dispatch({
             type: 'CLEAR_ERROR'
         }))

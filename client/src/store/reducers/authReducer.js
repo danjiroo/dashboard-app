@@ -1,7 +1,7 @@
 const initState = {
     token: localStorage.getItem('token'),
     isAuthenticated: localStorage.getItem('isAuthenticated'),
-    user: localStorage.getItem('user'),
+    user: localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')),
     isLoading: false
 }
 
@@ -23,7 +23,7 @@ const authReducer = (state = initState, action) => {
         // case 'REGISTER_SUCCESS':
             localStorage.setItem('token', action.payload.token);
             localStorage.setItem('isAuthenticated', true);
-            localStorage.setItem('user', action.payload);
+            localStorage.setItem('user', JSON.stringify(action.payload.user));
             return {
                 ...state,
                 ...action.payload,
