@@ -23,10 +23,10 @@ mongoose
     mongoose.set('debug', true);
     
 // use routes
-app.use('/api/users', require('./routes/api/users'));
-app.use('/api/auth', require('./routes/api/auth'));
-app.use('/api/tasks', require('./routes/api/tasks'));
-app.use('/api/assignedTasks', require('./routes/api/assignedTasks'));
+app.use('/users', require('./routes/api/users'));
+app.use('/auth', require('./routes/api/auth'));
+app.use('/tasks', require('./routes/api/tasks'));
+app.use('/assignedTasks', require('./routes/api/assignedTasks'));
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening to port: ${port}`));
