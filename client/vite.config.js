@@ -8,7 +8,7 @@ export default defineConfig({
     proxy: {
       // this generate: '/api/your-endpoint' => '/your-endpoint'
       '/api': {
-        target: 'http://localhost:5000',
+        target: import.meta.env.VITE_API_BASE_URL,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
