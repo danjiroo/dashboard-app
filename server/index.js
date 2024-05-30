@@ -22,7 +22,6 @@ mongoose
 
     mongoose.set('debug', true);
     
-// use routes
 app.use('/users', require('./routes/api/users'));
 app.use('/auth', require('./routes/api/auth'));
 app.use('/tasks', require('./routes/api/tasks'));
