@@ -5,20 +5,18 @@ import dotenv from 'dotenv';
 
 dotenv.config(); 
 
-export default defineConfig(() => {
+export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     server: {
-      proxy: {
+      // prod does not need to proxy, but instead, we directly call the api endpoints
+      proxy: mode === 'development' ? {
         '/api': {
-          // not working on prod/vercel, will debug later
-          // target: process.env.VITE_API_BASE_URL,
-          // target: 'http://localhost:5000',
-          target: 'https://workbin-danjiro-server.vercel.app',
+          target: 'http://localhost:5000',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
-        },
-      }
-    }
-  }
-} )
+        }
+      } : undefined,
+    },
+  };
+});

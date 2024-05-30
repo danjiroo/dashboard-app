@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "main": "index.js",
-  "proxy": "https://workbin-danjiro-server.vercel.app",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -10,7 +10,6 @@ import { loadUser } from './store/actions/authActions';
 
 const App = () => {
     const auth = useSelector(state => state.auth);
-    console.log('@authauth isAuthenticated?', auth)
     const { isAuthenticated } = auth;
 
     useEffect(() => {
@@ -18,8 +17,6 @@ const App = () => {
 
         store.dispatch(loadUser())
     }, [isAuthenticated])
-
-    console.log('@isAuthenticated', isAuthenticated)
 
     return (
         <div className="app_con">

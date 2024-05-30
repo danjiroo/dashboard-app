@@ -3,9 +3,11 @@ import axios from 'axios';
 import { tokenConfig } from './authActions';
 import { returnError } from './errorActions';
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL
+
 export const getTask = () => dispatch => {
     dispatch(setLoadingTask())
-    axios.get(`/api/tasks`)
+    axios.get(`${apiBaseUrl}/api/tasks`)
         .then(res => 
             dispatch({
                 type: 'GET_TASK',
@@ -16,7 +18,7 @@ export const getTask = () => dispatch => {
 }
 
 export const createTask = newtask => (dispatch, getState) => {
-    axios.post(`/api/tasks`, newtask, tokenConfig(getState)).then(res => {
+    axios.post(`${apiBaseUrl}/api/tasks`, newtask, tokenConfig(getState)).then(res => {
             dispatch({
                 type: 'CREATE_TASK',
                 payload: res.data
@@ -26,7 +28,7 @@ export const createTask = newtask => (dispatch, getState) => {
 }
 
 export const editTask = modifyTask => (dispatch, getState) => {
-    axios.put(`/api/tasks/${modifyTask._id}`, modifyTask, tokenConfig(getState)).then(res => {
+    axios.put(`${apiBaseUrl}/api/tasks/${modifyTask._id}`, modifyTask, tokenConfig(getState)).then(res => {
             dispatch({
                 type: 'MODIFY_TASK',
                 payload: res.data
@@ -37,7 +39,7 @@ export const editTask = modifyTask => (dispatch, getState) => {
 }
 
 export const deleteTask = id => (dispatch, getState) => {
-    axios.delete(`/api/tasks/${id}`, tokenConfig(getState)).then(res => {
+    axios.delete(`${apiBaseUrl}/api/tasks/${id}`, tokenConfig(getState)).then(res => {
             dispatch({
                 type: 'DELETE_TASK',
                 payload: id
@@ -48,7 +50,7 @@ export const deleteTask = id => (dispatch, getState) => {
 
 export const getAssignedTask = () => dispatch => {
     dispatch(setLoadingTask())
-    axios.get(`/api/assignedTasks`)
+    axios.get(`${apiBaseUrl}/api/assignedTasks`)
         .then(res => 
             dispatch({
                 type: 'GET_ASSIGNED_TASK',
@@ -59,7 +61,7 @@ export const getAssignedTask = () => dispatch => {
 }
 
 export const assignTask = newAssignedtask => (dispatch, getState) => {
-    axios.post(`/api/assignedTasks`, newAssignedtask, tokenConfig(getState)).then(res => {
+    axios.post(`${apiBaseUrl}/api/assignedTasks`, newAssignedtask, tokenConfig(getState)).then(res => {
             dispatch({
                 type: 'ASSIGN_TASK',
                 payload: res.data
@@ -70,7 +72,7 @@ export const assignTask = newAssignedtask => (dispatch, getState) => {
 }
 
 export const editAssignedTask = modifyAssignedTask => (dispatch, getState) => {
-    axios.put(`/api/assignedTasks/${modifyAssignedTask._id}`, modifyAssignedTask, tokenConfig(getState)).then(res => {
+    axios.put(`${apiBaseUrl}/api/assignedTasks/${modifyAssignedTask._id}`, modifyAssignedTask, tokenConfig(getState)).then(res => {
             dispatch({
                 type: 'MODIFY_ASSIGNED_TASK',
                 payload: res.data
@@ -83,7 +85,7 @@ export const editAssignedTask = modifyAssignedTask => (dispatch, getState) => {
 }
 
 export const reAssignTask = newAssignedTask => (dispatch, getState) => {
-    axios.put(`/api/assignedTasks/dev/${newAssignedTask._id}`, newAssignedTask, tokenConfig(getState)).then(res => {
+    axios.put(`${apiBaseUrl}/api/assignedTasks/dev/${newAssignedTask._id}`, newAssignedTask, tokenConfig(getState)).then(res => {
             dispatch({
                 type: 'RE_ASSIGN_TASK',
                 payload: res.data
@@ -96,7 +98,7 @@ export const reAssignTask = newAssignedTask => (dispatch, getState) => {
 }
 
 export const deleteAssignedTask = id => (dispatch, getState) => {
-    axios.delete(`/api/assignedTasks/${id}`, tokenConfig(getState)).then(res => {
+    axios.delete(`${apiBaseUrl}/api/assignedTasks/${id}`, tokenConfig(getState)).then(res => {
             dispatch({
                 type: 'DELETE_ASSIGNED_TASK',
                 payload: id
