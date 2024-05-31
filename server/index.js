@@ -35,8 +35,8 @@ app.use('/tasks', require('./routes/api/tasks'));
 app.use('/assignedTasks', require('./routes/api/assignedTasks'));
 
 app.get('/', (req, res) => {
-res.send('Welcome to the workbin server!');
+    res.send('Welcome to the workbin server!');
 });
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Listening to port: ${port}`));
+app.listen(port, () => console.log(`Listening to port: ${port}`));  
