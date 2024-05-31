@@ -2,10 +2,6 @@
   "name": "dashboard-app",
   "version": "1.0.0",
   "description": "",
-  "engines": {
-    "node": "12.15.*",
-    "npm": "6.13.*"
-  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
