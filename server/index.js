@@ -20,14 +20,12 @@ mongoose
     // mongodb+srv://danquesadaiii:<password>@cluster0.tuxzziy.mongodb.net/
     .connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.tuxzziy.mongodb.net/dashboard-app?retryWrites=true&w=majority`, {
         useNewUrlParser: true, 
-        useUnifiedTopology: true, 
-        useCreateIndex: true,
-        useFindAndModify: false
+        useUnifiedTopology: true
     })
     .then(() => console.log('MongoDB Connected successfully...'))
     .catch(err => console.log(err));
 
-    mongoose.set('debug', true);
+mongoose.set('debug', true);
     
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
