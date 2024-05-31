@@ -8,7 +8,12 @@ require('dotenv').config();
 
 const app = express();
 
-app.use(cors())
+app.use(cors({
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: 'Content-Type, Authorization'
+  }));
+
 app.use(bodyParser.json());
 
 mongoose
@@ -28,6 +33,10 @@ app.use('/users', require('./routes/api/users'));
 app.use('/auth', require('./routes/api/auth'));
 app.use('/tasks', require('./routes/api/tasks'));
 app.use('/assignedTasks', require('./routes/api/assignedTasks'));
+
+app.get('/', (req, res) => {
+res.send('Welcome to the workbin server!');
+});
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening to port: ${port}`));
