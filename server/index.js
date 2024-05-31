@@ -17,10 +17,9 @@ app.use(cors({
 app.use(bodyParser.json());
 
 mongoose
-    // mongodb+srv://danquesadaiii:<password>@cluster0.tuxzziy.mongodb.net/
     .connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.tuxzziy.mongodb.net/dashboard-app?retryWrites=true&w=majority`, {
-        useNewUrlParser: true, 
-        useUnifiedTopology: true
+        // useNewUrlParser: true, 
+        // useUnifiedTopology: true
     })
     .then(() => console.log('MongoDB Connected successfully...'))
     .catch(err => console.log(err));
