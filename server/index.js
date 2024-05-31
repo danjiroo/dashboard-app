@@ -18,8 +18,10 @@ app.use(bodyParser.json());
 
 mongoose
     .connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.tuxzziy.mongodb.net/dashboard-app?retryWrites=true&w=majority`, {
-        // useNewUrlParser: true, 
-        // useUnifiedTopology: true
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        bufferCommands: false, // Disable command buffering
+        bufferTimeoutMS: 0, // Set buffer timeout to 0 (no timeout)
     })
     .then(() => console.log('MongoDB Connected successfully...'))
     .catch(err => console.log(err));
