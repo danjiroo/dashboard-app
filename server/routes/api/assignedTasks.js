@@ -58,19 +58,15 @@ router.put('/dev/:id', auth, (req, res) => {
 // @desc    Remove Assigned Task
 // @access  Private
 router.delete('/:id', auth, (req, res) => {
-    console.log('@unassigning task req', req);
-
     AssignedTask.findByIdAndDelete(req.params.id)
         .then(task => {
             if (!task) {
-                return res.status(404).json({ success: false, message: 'Task not found' });
+                return res.status(404).json({ success: false, message: 'Assigned Task not found' });
             }
-            console.log('unassigned task:::', task);
             res.json({ success: true });
         })
         .catch(err => {
-            console.error('error in unassigning task', err);
-            res.status(500).json({ success: false, error: 'Server error' });
+            res.status(500).json({ success: false, error: 'Deleting Assigned Task Error' });
         });
 });
 

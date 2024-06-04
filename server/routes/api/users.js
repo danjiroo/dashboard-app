@@ -96,9 +96,16 @@ router.put('/:id', auth, (req, res) => {
 // @desc    Delete a user
 // @access  Private
 router.delete('/:id', auth, (req, res) => {
-    User.findById(req.params.id)
-        .then(user => user.remove().then(() => res.json({success: true})))
-        .catch(err => res.status(404).json({success: false}));
+    User.findByIdAndDelete(req.params.id)
+        .then(task => {
+            if (!task) {
+                return res.status(404).json({ success: false, message: 'User not found' });
+            }
+            res.json({ success: true });
+        })
+        .catch(err => {
+            res.status(500).json({ success: false, error: 'Deleting User Error' });
+        });
 })
 
 module.exports = router;

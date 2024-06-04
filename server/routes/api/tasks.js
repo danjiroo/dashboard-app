@@ -47,9 +47,18 @@ router.put('/:id', auth, (req, res) => {
 // @desc    Delete a Task
 // @access  Private
 router.delete('/:id', auth, (req, res) => {
-    Task.findById(req.params.id)
-        .then(task => task.remove().then(() => res.json({success: true})))
-        .catch(err => res.status(404).json({success: false}));
+    Task.findByIdAndDelete(req.params.id)
+        .then(task => {
+            if (!task) {
+                return res.status(404).json({ success: false, message: 'Task not found' });
+            }
+            console.log('unassigned task:::', task);
+            res.json({ success: true });
+        })
+        .catch(err => {
+            console.error('error in unassigning task', err);
+            res.status(500).json({ success: false, error: 'Deleting Task Error' });
+        });
 })
 
 module.exports = router;
