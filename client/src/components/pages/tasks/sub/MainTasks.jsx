@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -40,8 +41,6 @@ const MainTasks = () => {
         dispatch(getAssignedTask())
     }, [])
     
-    console.log('@assignedTasks', assignedTasks)
-
     const fetchAssignedTasks = assignedTasks.length && assignedTasks
         .filter(assignedTask => assignedTask.assignedToEmpId === user.empId)
         .map(owntask => {

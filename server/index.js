@@ -17,9 +17,9 @@ app.use(cors({
 app.use(bodyParser.json());
 
 mongoose
-    .connect(`mongodb+srv://danquesadaiii:ys85v4X9p5MVJH5Q@cluster0.tuxzziy.mongodb.net/dashboard-app?retryWrites=true&w=majority`)
+    .connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.tuxzziy.mongodb.net/dashboard-app?retryWrites=true&w=majority`)
     .then(() => console.log('MongoDB Connected successfully...'))
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));

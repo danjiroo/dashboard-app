@@ -14,7 +14,6 @@ router.get('/', (req, res) => {
     Task.find()
         .sort({ date: -1})
         .then(tasks => {
-            console.log('@tasksssss', tasks)
             return res.json(tasks)
         });
 });

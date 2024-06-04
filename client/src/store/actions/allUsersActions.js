@@ -14,7 +14,7 @@ export const getAllUsers = () => dispatch => {
                 payload: res.data
             })
         )
-        .catch(err => console.log(err))
+        .catch(err => console.error(err))
 }
 
 export const registerUser = newUser => (dispatch, getState) => {

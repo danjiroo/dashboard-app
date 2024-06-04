@@ -11,7 +11,6 @@ const AssignedTask = require('../../models/AssignedTask');
 // @desc    Get All Assigned Tasks
 // @access  Public
 router.get('/', (req, res) => {
-    console.log('HAHAHAHAHAHAHAHAHAH')
     return AssignedTask.find()
         .sort({ date: -1})
         .then(assignedTasks => res.json(assignedTasks));

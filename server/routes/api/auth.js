@@ -19,15 +19,11 @@ router.post('/', (req, res) => {
         return res.status(400).json({ msg: 'Please input all fields!' });
     }
 
-    console.log('@process.env.JWT_SECRET', process.env.JWT_SECRET)
-
     // check for existing user
     User.findOne({ email })
         .then(user => {
-            console.log('@user', {user, email, User})
             if(!user) return res.status(400).json({ msg: 'User does not exist.' });
 
-            console.log('@password', { password, userpass: user.password})
             // password validation
             bcrypt.compare(password, user.password)
                 .then(isMatch => {
@@ -58,8 +54,6 @@ router.post('/', (req, res) => {
 // @desc    Get user data
 // @access  Private
 router.get('/user', auth, (req, res) => {
-
-    console.log('@/user', { user, User, req:req.user.id})
     User.findById(req.user.id)
         .select('-password')
         .then(user => res.json(user));
