@@ -79,18 +79,26 @@ router.post('/', (req, res) => {
 // @route   PUT api/users
 // @desc    Modify a user
 // @access  Private
-router.put('/:id', auth, (req, res) => {
-    User.findByIdAndUpdate(req.params.id, {
-        name: req.body.name, 
-        email: req.body.email, 
-        role: req.body.role,
-        birth: req.body.birth,
-        gender: req.body.gender
-    }, function (err, user) {
-        if (err) return res.status(500).send('Invalid user ID');
-        res.status(200).send(user);
-    });
-})
+router.put('/:id', auth, async (req, res) => {
+    const { name, email, role, birth, gender } = req.body;
+
+    try {
+        const task = await AssignedTask.findByIdAndUpdate(
+            req.params.id,
+            { name, email, role, birth, gender },
+            { new: true, runValidators: true } // new: true returns the updated document
+        );
+
+        if (!task) {
+            return res.status(404).send('Invalid User ID');
+        }
+
+        res.status(200).send(task);
+    } catch (err) {
+        console.error('Error updating task:', err);
+        res.status(500).send('Server error');
+    }
+});
 
 // @route   DELETE api/users
 // @desc    Delete a user

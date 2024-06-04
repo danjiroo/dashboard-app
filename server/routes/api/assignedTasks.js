@@ -37,22 +37,50 @@ router.post('/', auth, (req, res) => {
 // @route   PUT api/tasks
 // @desc    Modify an assigned task
 // @access  Private
-router.put('/:id', auth, (req, res) => {
-    AssignedTask.findByIdAndUpdate(req.params.id, {title: req.body.title, instruction: req.body.instruction}, function (err, task) {
-        if (err) return res.status(500).send('Invalid task ID');
+router.put('/:id', auth, async (req, res) => {
+    const { title, instruction } = req.body;
+
+    try {
+        const task = await AssignedTask.findByIdAndUpdate(
+            req.params.id,
+            { title, instruction },
+            { new: true, runValidators: true } // new: true returns the updated document
+        );
+
+        if (!task) {
+            return res.status(404).send('Assigned Task not found');
+        }
+
         res.status(200).send(task);
-    });
-})
+    } catch (err) {
+        console.error('Error updating task:', err);
+        res.status(500).send('Server error');
+    }
+});
 
 // @route   PUT api/assignedTasks
 // @desc    Re-Assign a Task to
 // @access  Private
-router.put('/dev/:id', auth, (req, res) => {
-    AssignedTask.findByIdAndUpdate(req.params.id, {assignedTo: req.body.assignedTo, assignedToEmpId: req.body.assignedToEmpId}, function (err, task) {
-        if (err) return res.status(500).send('Invalid task ID');
+router.put('/dev/:id', auth, async (req, res) => {
+    const { assignedTo, assignedToEmpId } = req.body;
+
+    try {
+        const task = await AssignedTask.findByIdAndUpdate(
+            req.params.id,
+            { assignedTo, assignedToEmpId },
+            { new: true, runValidators: true } // new: true returns the updated document
+        );
+
+        if (!task) {
+            return res.status(404).send('Assigned Task not found - Dev');
+        }
+
         res.status(200).send(task);
-    });
-})
+    } catch (err) {
+        console.error('Error updating task - Dev Assigned to:', err);
+        res.status(500).send('Server error');
+    }
+});
 
 // @route   DELETE api/assignedTasks
 // @desc    Remove Assigned Task

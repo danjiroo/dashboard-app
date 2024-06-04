@@ -36,12 +36,26 @@ router.post('/', auth, (req, res) => {
 // @route   PUT api/tasks
 // @desc    Modify a task
 // @access  Private
-router.put('/:id', auth, (req, res) => {
-    Task.findByIdAndUpdate(req.params.id, {title: req.body.title, instruction: req.body.instruction}, function (err, task) {
-        if (err) return res.status(500).send('Invalid task ID');
+router.put('/:id', auth, async (req, res) => {
+    const { title, instruction } = req.body;
+
+    try {
+        const task = await AssignedTask.findByIdAndUpdate(
+            req.params.id,
+            { title, instruction },
+            { new: true, runValidators: true } // new: true returns the updated document
+        );
+
+        if (!task) {
+            return res.status(404).send('Task not found');
+        }
+
         res.status(200).send(task);
-    });
-})
+    } catch (err) {
+        console.error('Error updating task:', err);
+        res.status(500).send('Server error');
+    }
+});
 
 // @route   DELETE api/tasks
 // @desc    Delete a Task
